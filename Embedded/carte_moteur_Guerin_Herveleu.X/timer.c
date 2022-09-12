@@ -1,6 +1,8 @@
 #include <xc.h>
 #include "timer.h"
 #include "IO.h"
+#include "PWM.h"
+int sens =0;
 
 //Initialisation d?un timer 32 bits
 void InitTimer23(void) {
@@ -24,6 +26,19 @@ T2CONbits.TON = 1; // Start 32-bit Timer
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
 IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
 LED_ORANGE = !LED_ORANGE;
+
+//if(sens==0)
+//{
+//    PWMSetSpeed(28, MOTEUR_D);
+//    PWMSetSpeed(28, MOTEUR_G);
+//    sens = 1;
+//}
+//else
+//{
+//        PWMSetSpeed(-28, MOTEUR_D);
+//        PWMSetSpeed(-28, MOTEUR_G);
+//        sens = 0;
+//}
 }
 
 //Initialisation d?un timer 16 bits

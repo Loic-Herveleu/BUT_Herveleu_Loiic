@@ -29,7 +29,6 @@ int main(void) {
     // Boucle Principale
     
     InitPWM();
-    PWMSetSpeed(0);
     /****************************************************************************************************/
     while (1) {
         //LED_BLANCHE = !LED_BLANCHE;
