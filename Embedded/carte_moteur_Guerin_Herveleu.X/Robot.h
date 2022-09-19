@@ -2,6 +2,7 @@
 #define ROBOT_H
 
 void PWMUpdateSpeed();
+void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur);
 
 typedef struct robotStateBITS {
 union {
