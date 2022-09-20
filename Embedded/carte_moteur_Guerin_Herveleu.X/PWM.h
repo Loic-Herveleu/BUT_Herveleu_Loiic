@@ -5,7 +5,7 @@
 #define MOTEUR_D 44
 
 void InitPWM(void);
-void PWMSetSpeed(float vitesseEnPourcents,float moteur);
+//void PWMSetSpeed(float vitesseEnPourcents,float moteur);
 
 #endif	/* PWM_H */
 

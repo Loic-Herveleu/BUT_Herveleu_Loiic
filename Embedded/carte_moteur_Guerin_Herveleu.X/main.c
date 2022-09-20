@@ -6,6 +6,10 @@
 #include "timer.h"
 #include "PWM.h"
 
+unsigned int ADCValue0;
+unsigned int ADCValue1;
+unsigned int ADCValue2;
+
 int main(void) {
     /***************************************************************************************************/
     //Initialisation de l?oscillateur
@@ -23,17 +27,24 @@ int main(void) {
 
     // initialisation des timer
     InitTimer23();
-            
+
     InitTimer1();
     /****************************************************************************************************/
     // Boucle Principale
-    
     InitPWM();
+    InitADC1();
     /****************************************************************************************************/
     while (1) {
         //LED_BLANCHE = !LED_BLANCHE;
         //LED_BLEUE = !LED_BLEUE;
-       // LED_ORANGE = !LED_ORANGE;
-        
+        // LED_ORANGE = !LED_ORANGE;
+
+        if (ADCIsConversionFinished()) {
+        ADCClearConversionFinishedFlag();
+        unsigned int * result = ADCGetResult();
+        ADCValue0=result[0];
+        ADCValue1=result[1];
+        ADCValue2=result[2];           
+        }
     } // fin main
 }
