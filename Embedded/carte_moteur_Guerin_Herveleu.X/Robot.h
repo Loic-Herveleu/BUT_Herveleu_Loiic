@@ -12,7 +12,12 @@ unsigned char taskEnCours;
 float vitesseGaucheConsigne;
 float vitesseGaucheCommandeCourante;
 float vitesseDroiteConsigne;
-float vitesseDroiteCommandeCourante;}
+float vitesseDroiteCommandeCourante;
+float distanceTelemetreDroit;
+float distanceTelemetreGauche;
+float distanceTelemetreCentre;
+float distanceTelemetreEXTDroit;
+float distanceTelemetreEXTGauche;}
 ;}
 ;} ROBOT_STATE_BITS;
 

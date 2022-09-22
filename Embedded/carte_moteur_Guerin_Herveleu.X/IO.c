@@ -10,8 +10,7 @@
 
 #include "IO.h"
 
-void InitIO()
- {
+void InitIO() {
 
     // IMPORTANT : désactiver les entrées analogiques, sinon on perd les entrées numériques
 
@@ -55,11 +54,13 @@ void InitIO()
 
     //********** Configuration des entrées : _TRISxx = 1 ********************************   
     _TRISG9 = 1;
-    
+
     _TRISC0 = 1;
-    
+
     _TRISC11 = 1;
 
+    _TRISE15 = 1;
 
+    _TRISB1 = 1;
 
 }
