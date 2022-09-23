@@ -7,6 +7,7 @@
 #include "PWM.h"
 #include "Robot.h"
 #include "ADC.h"
+#include "main.h"
 
 unsigned int ADCValue0;
 unsigned int ADCValue1;
@@ -29,8 +30,8 @@ int main(void) {
 
     // initialisation des timer
     InitTimer23();
-
     InitTimer1();
+    InitTimer4();
     /****************************************************************************************************/
     // Boucle Principale
     InitPWM();
@@ -84,5 +85,10 @@ int main(void) {
         } else {
             LED_BLANCHE = 0;
         }
-    } // fin main
+    }
+    //Fonction Operating
+    
+    
+    
+    // fin main
 }
