@@ -4,10 +4,17 @@ Tool Name:
   c:\program files\microchip\xc16\v2.00\bin\bin\..\bin/elf-ld.exe
 
 Command:
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.00 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.01 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.02 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.03 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.04 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.05 \
+  -TC:\\Users\\TABLE 6\\AppData\\Local\\Temp\\tmp00002724.06 \
   -p33EP512GM306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16 \
   -o \
-  dist/default/production/carte_moteur_Guerin_Herveleu.X.production.elf \
+  dist/default/debug/carte_moteur_Guerin_Herveleu.X.debug.elf \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/.. \
   -LC:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/PIC24E/gld \
   -LC:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/dsPIC33E/gld \
@@ -19,12 +26,15 @@ Command:
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/main.o \
-  build/default/production/ChipConfig.o \
-  build/default/production/IO.o \
+  build/default/debug/main.o \
+  build/default/debug/ChipConfig.o \
+  build/default/debug/IO.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp33EP512GM306.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_ICD4=1 \
+  -Tp33EP512GM306.gld.07 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -36,10 +46,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/carte_moteur_Guerin_Herveleu.X.production.map \
+  -Map=dist/default/debug/carte_moteur_Guerin_Herveleu.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=c99-pic30-elf \
   --library=m-elf \
@@ -93,8 +103,15 @@ section                    address   length (PC units)   length (bytes) (dec)
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
+reserve_data_0x1000         0x1000                0x1c            0x1c  (28)
+reserve_data_0x101c         0x101c                 0x2             0x2  (2)
+reserve_data_0x101e         0x101e                 0x2             0x2  (2)
+reserve_data_0x1020         0x1020                 0x2             0x2  (2)
+reserve_data_0x1022         0x1022                 0x2             0x2  (2)
+reserve_data_0x1024         0x1024                 0x4             0x4  (4)
+reserve_data_0x1028         0x1028                0x28            0x28  (40)
 
-                 Total "data" memory used (bytes):              0  (0) 
+                 Total "data" memory used (bytes):           0x50  (80) <1%
 
 
 Dynamic Memory Usage
@@ -102,9 +119,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x1000                              0xc000  (49152)
+stack                       0x1050                              0xbfb0  (49072)
 
-                 Maximum dynamic memory (bytes):         0xc000  (49152)
+                 Maximum dynamic memory (bytes):         0xbfb0  (49072)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -154,10 +171,48 @@ FUID3            0x800ffe           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/main.o
-LOAD build/default/production/ChipConfig.o
-LOAD build/default/production/IO.o
+
+reserve_data_0x1000
+                    0x1000         0x1c
+                    0x101c                  . = 0x1c
+ *fill*             0x1000         0x1c00
+
+reserve_data_0x101c
+                    0x101c          0x2
+                    0x101e                  . = 0x2
+ *fill*             0x101c          0x200
+
+reserve_data_0x101e
+                    0x101e          0x2
+                    0x1020                  . = 0x2
+ *fill*             0x101e          0x200
+
+reserve_data_0x1020
+                    0x1020          0x2
+                    0x1022                  . = 0x2
+ *fill*             0x1020          0x200
+
+reserve_data_0x1022
+                    0x1022          0x2
+                    0x1024                  . = 0x2
+ *fill*             0x1022          0x200
+
+reserve_data_0x1024
+                    0x1024          0x4
+                    0x1028                  . = 0x4
+ *fill*             0x1024          0x400
+
+reserve_data_0x1028
+                    0x1028         0x28
+                    0x1050                  . = 0x28
+ *fill*             0x1028         0x2800
+LOAD build/default/debug/main.o
+LOAD build/default/debug/ChipConfig.o
+LOAD build/default/debug/IO.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_ICD4 = 0x1
 LOAD p33EP512GM306
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libfx-elf.a
                     0x557f0                  __FICD = 0x557f0
@@ -226,7 +281,7 @@ __FOSCSEL
 
 __FGS             0x0557fa          0x2
  *(__FGS.sec*)
- __FGS.sec        0x0557fa          0x2 /CW/_FGS€
+ __FGS.sec        0x0557fa          0x2 /CW/_FGS@¶5
                   0x0557fa                  __FGS.sec
 
 __FUID0
@@ -246,34 +301,34 @@ __FUID3
 
 .debug_info       0x000000        0xd38
  *(.debug_info)
- .debug_info      0x000000        0x38a build/default/production/main.o
- .debug_info      0x00038a        0x547 build/default/production/ChipConfig.o
- .debug_info      0x0008d1        0x467 build/default/production/IO.o
+ .debug_info      0x000000        0x38a build/default/debug/main.o
+ .debug_info      0x00038a        0x547 build/default/debug/ChipConfig.o
+ .debug_info      0x0008d1        0x467 build/default/debug/IO.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x1e8
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0x8c build/default/production/main.o
- .debug_abbrev    0x00008c         0xc3 build/default/production/ChipConfig.o
- .debug_abbrev    0x00014f         0x99 build/default/production/IO.o
+ .debug_abbrev    0x000000         0x8c build/default/debug/main.o
+ .debug_abbrev    0x00008c         0xc3 build/default/debug/ChipConfig.o
+ .debug_abbrev    0x00014f         0x99 build/default/debug/IO.o
 
 .debug_line       0x000000        0x34d
  *(.debug_line)
- .debug_line      0x000000        0x115 build/default/production/main.o
- .debug_line      0x000115        0x11e build/default/production/ChipConfig.o
- .debug_line      0x000233        0x11a build/default/production/IO.o
+ .debug_line      0x000000        0x115 build/default/debug/main.o
+ .debug_line      0x000115        0x11e build/default/debug/ChipConfig.o
+ .debug_line      0x000233        0x11a build/default/debug/IO.o
 
 .debug_frame      0x000000         0x8a
  *(.debug_frame)
- .debug_frame     0x000000         0x2e build/default/production/main.o
- .debug_frame     0x00002e         0x2e build/default/production/ChipConfig.o
- .debug_frame     0x00005c         0x2e build/default/production/IO.o
+ .debug_frame     0x000000         0x2e build/default/debug/main.o
+ .debug_frame     0x00002e         0x2e build/default/debug/ChipConfig.o
+ .debug_frame     0x00005c         0x2e build/default/debug/IO.o
 
 .debug_str        0x000000         0x3c
  *(.debug_str)
- .debug_str       0x000000         0x12 build/default/production/main.o
- .debug_str       0x000012         0x16 build/default/production/ChipConfig.o
- .debug_str       0x000028         0x14 build/default/production/IO.o
+ .debug_str       0x000000         0x12 build/default/debug/main.o
+ .debug_str       0x000012         0x16 build/default/debug/ChipConfig.o
+ .debug_str       0x000028         0x14 build/default/debug/IO.o
 
 .debug_loc
  *(.debug_loc)
@@ -285,11 +340,11 @@ __FUID3
                   0x000000         0x5d
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x1b build/default/production/main.o
+                  0x000000         0x1b build/default/debug/main.o
  .debug_pubnames
-                  0x00001b         0x25 build/default/production/ChipConfig.o
+                  0x00001b         0x25 build/default/debug/ChipConfig.o
  .debug_pubnames
-                  0x000040         0x1d build/default/production/IO.o
+                  0x000040         0x1d build/default/debug/IO.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -297,11 +352,11 @@ __FUID3
 .debug_aranges    0x000000         0x48
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/main.o
+                  0x000000         0x18 build/default/debug/main.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/ChipConfig.o
+                  0x000018         0x18 build/default/debug/ChipConfig.o
  .debug_aranges
-                  0x000030         0x18 build/default/production/IO.o
+                  0x000030         0x18 build/default/debug/IO.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -2132,54 +2187,54 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-elf.a
 END GROUP
-OUTPUT(dist/default/production/carte_moteur_Guerin_Herveleu.X.production.elf elf32-pic30)
-LOAD /CW/_FGS€
+OUTPUT(dist/default/debug/carte_moteur_Guerin_Herveleu.X.debug.elf elf32-pic30)
+LOAD /CW/_FGS@¶5
 LOAD default_isr
 
 .debug_pubtypes
                   0x000048        0x117
  .debug_pubtypes
-                  0x000048         0x59 build/default/production/main.o
+                  0x000048         0x59 build/default/debug/main.o
  .debug_pubtypes
-                  0x0000a1         0x61 build/default/production/ChipConfig.o
+                  0x0000a1         0x61 build/default/debug/ChipConfig.o
  .debug_pubtypes
-                  0x000102         0x5d build/default/production/IO.o
+                  0x000102         0x5d build/default/debug/IO.o
 
 __c30_signature
                   0x00015f         0x1e
  __c30_signature
-                  0x00015f          0x6 build/default/production/main.o
+                  0x00015f          0x6 build/default/debug/main.o
  __c30_signature
-                  0x000165          0x6 build/default/production/ChipConfig.o
+                  0x000165          0x6 build/default/debug/ChipConfig.o
  __c30_signature
-                  0x00016b          0x6 build/default/production/IO.o
+                  0x00016b          0x6 build/default/debug/IO.o
  __c30_signature
                   0x000171          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extendedep.o)
  __c30_signature
                   0x000177          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(data_init_extended.o)
 
 .config_IESO      0x0557f8          0x2
- .config_IESO     0x0557f8          0x2 build/default/production/ChipConfig.o
+ .config_IESO     0x0557f8          0x2 build/default/debug/ChipConfig.o
 
 .config_FCKSM     0x0557f6          0x2
- .config_FCKSM    0x0557f6          0x2 build/default/production/ChipConfig.o
+ .config_FCKSM    0x0557f6          0x2 build/default/debug/ChipConfig.o
 
 .config_FWDTEN    0x0557f4          0x2
  .config_FWDTEN
-                  0x0557f4          0x2 build/default/production/ChipConfig.o
+                  0x0557f4          0x2 build/default/debug/ChipConfig.o
 
 .config_WDTWIN    0x0557f2          0x2
  .config_WDTWIN
-                  0x0557f2          0x2 build/default/production/ChipConfig.o
+                  0x0557f2          0x2 build/default/debug/ChipConfig.o
 
 .config_JTAGEN    0x0557f0          0x2
  .config_JTAGEN
-                  0x0557f0          0x2 build/default/production/ChipConfig.o
+                  0x0557f0          0x2 build/default/debug/ChipConfig.o
 
 .text             0x000300         0x82
- .text            0x000300         0x56 build/default/production/ChipConfig.o
+ .text            0x000300         0x56 build/default/debug/ChipConfig.o
                   0x000300                  _InitOscillator
- .text            0x000356         0x1a build/default/production/IO.o
+ .text            0x000356         0x1a build/default/debug/IO.o
                   0x000356                  _InitIO
- .text            0x000370         0x12 build/default/production/main.o
+ .text            0x000370         0x12 build/default/debug/main.o
                   0x000370                  _main
