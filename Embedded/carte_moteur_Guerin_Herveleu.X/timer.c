@@ -8,6 +8,8 @@
 int sens = 0;
 int etat = 0;
 unsigned long timestamp = 0;
+unsigned long lasttimestamp = 0;
+
 
 //Initialisation d?un timer 32 bits
 
