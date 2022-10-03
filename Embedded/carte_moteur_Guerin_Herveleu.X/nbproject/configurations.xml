@@ -217,6 +217,11 @@
         <property key="programmerToGoFilePath"
                   value="C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/debug/default/carte_moteur_Guerin_Herveleu_ptg"/>
       </ICD4Tool>
+      <Tool>
+        <property key="memories.programmemory.ranges" value="0-557eb"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/debug/default/carte_moteur_Guerin_Herveleu_ptg"/>
+      </Tool>
     </conf>
   </confs>
 </configurationDescriptor>
