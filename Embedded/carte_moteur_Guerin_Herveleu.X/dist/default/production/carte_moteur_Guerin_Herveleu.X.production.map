@@ -5,12 +5,12 @@ Tool Name:
 
 Command:
   -p33EP512GM706 \
-  --mdfp=C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16 \
+  --mdfp=C:/Users/Table8-2/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16 \
   -o \
   dist/default/production/carte_moteur_Guerin_Herveleu.X.production.elf \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/.. \
-  -LC:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/PIC24E/gld \
-  -LC:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/dsPIC33E/gld \
+  -LC:/Users/Table8-2/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/PIC24E/gld \
+  -LC:/Users/Table8-2/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85/xc16/bin/../support/dsPIC33E/gld \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../lib \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../support/PIC24E/gld \
   -Lc:/program files/microchip/xc16/v2.00/bin/bin/../../support/PIC24F/gld \
@@ -27,6 +27,7 @@ Command:
   build/default/production/ToolBox.o \
   build/default/production/PWM.o \
   build/default/production/ADC.o \
+  build/default/production/brouillonstrat.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33EP512GM706.gld.00 \
@@ -129,10 +130,10 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x9f2           0xeeb  (3819)
-.text                        0xbf2               0xb8c          0x1152  (4434)
-.dinit                      0x177e                0x2a            0x3f  (63)
+.text                        0xbf2               0xb24          0x10b6  (4278)
+.dinit                      0x1716                0x2a            0x3f  (63)
 
-                 Total "program" memory used (bytes):         0x207c  (8316) 1%
+                 Total "program" memory used (bytes):         0x1fe0  (8160) 1%
 
 
 "data" Memory  [Origin = 0x1000, Length = 0xc000]
@@ -232,55 +233,55 @@ External Symbols in Program Memory (by address):
                   0x000be2                  __funpack2
                   0x000bf2                  _main
                   0x000d70                  _OperatingSystemLoop
-                  0x000ece                  _SetNextRobotStateInAutomaticMode
-                  0x001176                  _InitTimer23
-                  0x0011a8                  _InitTimer1
-                  0x0011be                  _InitTimer4
-                  0x0011d4                  _SetFreqTimer1
-                  0x0012bc                  _SetFreqTimer4
-                  0x0013a4                  _InitPWM
-                  0x0013dc                  _PWMUpdateSpeed
-                  0x00151e                  _Abs
-                  0x00154a                  _Max
-                  0x00157e                  _Min
-                  0x0015b2                  _LimitToInterval
-                  0x001608                  _RadianToDegree
-                  0x001620                  _DegreeToRadian
-                  0x001638                  _InitADC1
-                  0x0016ac                  _ADC1StartConversionSequence
-                  0x0016b4                  _ADCGetResult
-                  0x0016bc                  _ADCIsConversionFinished
-                  0x0016c4                  _ADCClearConversionFinishedFlag
-                  0x0016cc                  _InitOscillator
-                  0x001722                  _PWMSetSpeedConsigne
-                  0x001752                  _InitIO
+                  0x000e4e                  _SetNextRobotStateInAutomaticMode
+                  0x00110e                  _InitTimer23
+                  0x001140                  _InitTimer1
+                  0x001156                  _InitTimer4
+                  0x00116c                  _SetFreqTimer1
+                  0x001254                  _SetFreqTimer4
+                  0x00133c                  _InitPWM
+                  0x001374                  _PWMUpdateSpeed
+                  0x0014b6                  _Abs
+                  0x0014e2                  _Max
+                  0x001516                  _Min
+                  0x00154a                  _LimitToInterval
+                  0x0015a0                  _RadianToDegree
+                  0x0015b8                  _DegreeToRadian
+                  0x0015d0                  _InitADC1
+                  0x001644                  _ADC1StartConversionSequence
+                  0x00164c                  _ADCGetResult
+                  0x001654                  _ADCIsConversionFinished
+                  0x00165c                  _ADCClearConversionFinishedFlag
+                  0x001664                  _InitOscillator
+                  0x0016ba                  _PWMSetSpeedConsigne
+                  0x0016ea                  _InitIO
                   0x0557fa                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0016ac                  _ADC1StartConversionSequence
-                  0x0016c4                  _ADCClearConversionFinishedFlag
-                  0x0016b4                  _ADCGetResult
-                  0x0016bc                  _ADCIsConversionFinished
-                  0x00151e                  _Abs
-                  0x001620                  _DegreeToRadian
-                  0x001638                  _InitADC1
-                  0x001752                  _InitIO
-                  0x0016cc                  _InitOscillator
-                  0x0013a4                  _InitPWM
-                  0x0011a8                  _InitTimer1
-                  0x001176                  _InitTimer23
-                  0x0011be                  _InitTimer4
-                  0x0015b2                  _LimitToInterval
-                  0x00154a                  _Max
-                  0x00157e                  _Min
+                  0x001644                  _ADC1StartConversionSequence
+                  0x00165c                  _ADCClearConversionFinishedFlag
+                  0x00164c                  _ADCGetResult
+                  0x001654                  _ADCIsConversionFinished
+                  0x0014b6                  _Abs
+                  0x0015b8                  _DegreeToRadian
+                  0x0015d0                  _InitADC1
+                  0x0016ea                  _InitIO
+                  0x001664                  _InitOscillator
+                  0x00133c                  _InitPWM
+                  0x001140                  _InitTimer1
+                  0x00110e                  _InitTimer23
+                  0x001156                  _InitTimer4
+                  0x00154a                  _LimitToInterval
+                  0x0014e2                  _Max
+                  0x001516                  _Min
                   0x000d70                  _OperatingSystemLoop
-                  0x001722                  _PWMSetSpeedConsigne
-                  0x0013dc                  _PWMUpdateSpeed
-                  0x001608                  _RadianToDegree
-                  0x0011d4                  _SetFreqTimer1
-                  0x0012bc                  _SetFreqTimer4
-                  0x000ece                  _SetNextRobotStateInAutomaticMode
+                  0x0016ba                  _PWMSetSpeedConsigne
+                  0x001374                  _PWMUpdateSpeed
+                  0x0015a0                  _RadianToDegree
+                  0x00116c                  _SetFreqTimer1
+                  0x001254                  _SetFreqTimer4
+                  0x000e4e                  _SetNextRobotStateInAutomaticMode
                   0x00036e                  __AD1Interrupt
                   0x0003a4                  __DefaultInterrupt
                   0x0557fa                  __FGS.sec
@@ -350,6 +351,7 @@ LOAD build/default/production/Robot.o
 LOAD build/default/production/ToolBox.o
 LOAD build/default/production/PWM.o
 LOAD build/default/production/ADC.o
+LOAD build/default/production/brouillonstrat.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p33EP512GM706
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libfx-elf.a
@@ -477,7 +479,7 @@ __FOSCSEL
 
 __FGS             0x0557fa          0x2
  *(__FGS.sec*)
- __FGS.sec        0x0557fa          0x2 /CW/_FGS`'C
+ __FGS.sec        0x0557fa          0x2 /CW/_FGS N
                   0x0557fa                  __FGS.sec
 
 __FUID0
@@ -526,7 +528,7 @@ __FUID3
  .debug_info      0x00549a         0x8e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x8fc
+.debug_abbrev     0x000000        0x8fd
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x154 build/default/production/main.o
  .debug_abbrev    0x000154         0xc3 build/default/production/ChipConfig.o
@@ -536,56 +538,58 @@ __FUID3
  .debug_abbrev    0x0004a6         0x6d build/default/production/ToolBox.o
  .debug_abbrev    0x000513        0x132 build/default/production/PWM.o
  .debug_abbrev    0x000645        0x13b build/default/production/ADC.o
- .debug_abbrev    0x000780         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
- .debug_abbrev    0x000794         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
- .debug_abbrev    0x0007a8         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
- .debug_abbrev    0x0007bc         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
- .debug_abbrev    0x0007d0         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
- .debug_abbrev    0x0007e4         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
- .debug_abbrev    0x0007f8         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.EP_o)
- .debug_abbrev    0x00080c         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.EP_o)
- .debug_abbrev    0x000820         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.EP_o)
- .debug_abbrev    0x000834         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.EP_o)
- .debug_abbrev    0x000848         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.EP_o)
- .debug_abbrev    0x00085c         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.EP_o)
- .debug_abbrev    0x000870         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.EP_o)
- .debug_abbrev    0x000884         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.EP_o)
- .debug_abbrev    0x000898         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.EP_o)
- .debug_abbrev    0x0008ac         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
- .debug_abbrev    0x0008c0         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
- .debug_abbrev    0x0008d4         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
- .debug_abbrev    0x0008e8         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
+ .debug_abbrev    0x000780          0x1 build/default/production/brouillonstrat.o
+ .debug_abbrev    0x000781         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
+ .debug_abbrev    0x000795         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
+ .debug_abbrev    0x0007a9         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
+ .debug_abbrev    0x0007bd         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
+ .debug_abbrev    0x0007d1         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
+ .debug_abbrev    0x0007e5         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
+ .debug_abbrev    0x0007f9         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.EP_o)
+ .debug_abbrev    0x00080d         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.EP_o)
+ .debug_abbrev    0x000821         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.EP_o)
+ .debug_abbrev    0x000835         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.EP_o)
+ .debug_abbrev    0x000849         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.EP_o)
+ .debug_abbrev    0x00085d         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.EP_o)
+ .debug_abbrev    0x000871         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.EP_o)
+ .debug_abbrev    0x000885         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.EP_o)
+ .debug_abbrev    0x000899         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.EP_o)
+ .debug_abbrev    0x0008ad         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
+ .debug_abbrev    0x0008c1         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
+ .debug_abbrev    0x0008d5         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
+ .debug_abbrev    0x0008e9         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
 
-.debug_line       0x000000       0x11b1
+.debug_line       0x000000       0x1128
  *(.debug_line)
- .debug_line      0x000000        0x1d9 build/default/production/main.o
- .debug_line      0x0001d9        0x11e build/default/production/ChipConfig.o
- .debug_line      0x0002f7        0x121 build/default/production/IO.o
- .debug_line      0x000418        0x184 build/default/production/timer.o
- .debug_line      0x00059c         0x42 build/default/production/Robot.o
- .debug_line      0x0005de         0x54 build/default/production/ToolBox.o
- .debug_line      0x000632        0x14f build/default/production/PWM.o
- .debug_line      0x000781        0x153 build/default/production/ADC.o
- .debug_line      0x0008d4         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
- .debug_line      0x00090b         0x35 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
- .debug_line      0x000940         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
- .debug_line      0x000996         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
- .debug_line      0x0009e9         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
- .debug_line      0x000a24         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
- .debug_line      0x000a6e        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.EP_o)
- .debug_line      0x000ba4        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.EP_o)
- .debug_line      0x000cc8         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.EP_o)
- .debug_line      0x000d94         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.EP_o)
- .debug_line      0x000e06         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.EP_o)
- .debug_line      0x000e80         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.EP_o)
- .debug_line      0x000ede         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.EP_o)
- .debug_line      0x000f2f         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.EP_o)
- .debug_line      0x000fc7         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.EP_o)
- .debug_line      0x001040         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.EP_o)
- .debug_line      0x00105a         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
- .debug_line      0x0010ad         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
- .debug_line      0x001119         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
- .debug_line      0x001173         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
+ .debug_line      0x000000        0x1a4 build/default/production/main.o
+ .debug_line      0x0001a4        0x108 build/default/production/ChipConfig.o
+ .debug_line      0x0002ac        0x10b build/default/production/IO.o
+ .debug_line      0x0003b7        0x16e build/default/production/timer.o
+ .debug_line      0x000525         0x42 build/default/production/Robot.o
+ .debug_line      0x000567         0x54 build/default/production/ToolBox.o
+ .debug_line      0x0005bb        0x139 build/default/production/PWM.o
+ .debug_line      0x0006f4        0x13d build/default/production/ADC.o
+ .debug_line      0x000831         0x1a build/default/production/brouillonstrat.o
+ .debug_line      0x00084b         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
+ .debug_line      0x000882         0x35 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
+ .debug_line      0x0008b7         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
+ .debug_line      0x00090d         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
+ .debug_line      0x000960         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
+ .debug_line      0x00099b         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
+ .debug_line      0x0009e5        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.EP_o)
+ .debug_line      0x000b1b        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.EP_o)
+ .debug_line      0x000c3f         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.EP_o)
+ .debug_line      0x000d0b         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.EP_o)
+ .debug_line      0x000d7d         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.EP_o)
+ .debug_line      0x000df7         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.EP_o)
+ .debug_line      0x000e55         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.EP_o)
+ .debug_line      0x000ea6         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.EP_o)
+ .debug_line      0x000f3e         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.EP_o)
+ .debug_line      0x000fb7         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.EP_o)
+ .debug_line      0x000fd1         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
+ .debug_line      0x001024         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
+ .debug_line      0x001090         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
+ .debug_line      0x0010ea         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
 
 .debug_frame      0x000000        0x41c
  *(.debug_frame)
@@ -2929,7 +2933,7 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-elf.a
 END GROUP
 OUTPUT(dist/default/production/carte_moteur_Guerin_Herveleu.X.production.elf elf32-pic30)
-LOAD /CW/_FGS`'C
+LOAD /CW/_FGS N
 LOAD default_isr
 LOAD data_init
 
@@ -2951,7 +2955,7 @@ LOAD data_init
                   0x00068b        0x1d2 build/default/production/ADC.o
 
 __c30_signature
-                  0x00085d         0x7e
+                  0x00085d         0x84
  __c30_signature
                   0x00085d          0x6 build/default/production/main.o
  __c30_signature
@@ -2969,31 +2973,33 @@ __c30_signature
  __c30_signature
                   0x000887          0x6 build/default/production/ADC.o
  __c30_signature
-                  0x00088d          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extendedep.o)
+                  0x00088d          0x6 build/default/production/brouillonstrat.o
  __c30_signature
-                  0x000893          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(data_init_extended.o)
+                  0x000893          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extendedep.o)
  __c30_signature
-                  0x000899          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
+                  0x000899          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(data_init_extended.o)
  __c30_signature
-                  0x00089f          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
+                  0x00089f          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.EP_o)
  __c30_signature
-                  0x0008a5          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
+                  0x0008a5          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.EP_o)
  __c30_signature
-                  0x0008ab          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
+                  0x0008ab          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.EP_o)
  __c30_signature
-                  0x0008b1          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
+                  0x0008b1          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.EP_o)
  __c30_signature
-                  0x0008b7          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
+                  0x0008b7          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.EP_o)
  __c30_signature
-                  0x0008bd          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.EP_o)
+                  0x0008bd          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.EP_o)
  __c30_signature
-                  0x0008c3          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
+                  0x0008c3          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.EP_o)
  __c30_signature
-                  0x0008c9          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
+                  0x0008c9          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.EP_o)
  __c30_signature
-                  0x0008cf          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
+                  0x0008cf          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.EP_o)
  __c30_signature
-                  0x0008d5          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
+                  0x0008d5          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.EP_o)
+ __c30_signature
+                  0x0008db          0x6 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.EP_o)
 
 .nbss               0x1000         0x20
  .nbss              0x1000          0xc build/default/production/timer.o
@@ -3061,39 +3067,39 @@ __c30_signature
  .ivt._AD1Interrupt
                   0x00002e          0x2 build/default/production/ADC.o
 
-.text             0x000bf2        0xb8c
- .text            0x000bf2        0x584 build/default/production/main.o
+.text             0x000bf2        0xb24
+ .text            0x000bf2        0x51c build/default/production/main.o
                   0x000bf2                  _main
                   0x000d70                  _OperatingSystemLoop
-                  0x000ece                  _SetNextRobotStateInAutomaticMode
- .text            0x001176        0x22e build/default/production/timer.o
-                  0x001176                  _InitTimer23
-                  0x0011a8                  _InitTimer1
-                  0x0011be                  _InitTimer4
-                  0x0011d4                  _SetFreqTimer1
-                  0x0012bc                  _SetFreqTimer4
- .text            0x0013a4        0x17a build/default/production/PWM.o
-                  0x0013a4                  _InitPWM
-                  0x0013dc                  _PWMUpdateSpeed
- .text            0x00151e        0x11a build/default/production/ToolBox.o
-                  0x00151e                  _Abs
-                  0x00154a                  _Max
-                  0x00157e                  _Min
-                  0x0015b2                  _LimitToInterval
-                  0x001608                  _RadianToDegree
-                  0x001620                  _DegreeToRadian
- .text            0x001638         0x94 build/default/production/ADC.o
-                  0x001638                  _InitADC1
-                  0x0016ac                  _ADC1StartConversionSequence
-                  0x0016b4                  _ADCGetResult
-                  0x0016bc                  _ADCIsConversionFinished
-                  0x0016c4                  _ADCClearConversionFinishedFlag
- .text            0x0016cc         0x56 build/default/production/ChipConfig.o
-                  0x0016cc                  _InitOscillator
- .text            0x001722         0x30 build/default/production/Robot.o
-                  0x001722                  _PWMSetSpeedConsigne
- .text            0x001752         0x2c build/default/production/IO.o
-                  0x001752                  _InitIO
+                  0x000e4e                  _SetNextRobotStateInAutomaticMode
+ .text            0x00110e        0x22e build/default/production/timer.o
+                  0x00110e                  _InitTimer23
+                  0x001140                  _InitTimer1
+                  0x001156                  _InitTimer4
+                  0x00116c                  _SetFreqTimer1
+                  0x001254                  _SetFreqTimer4
+ .text            0x00133c        0x17a build/default/production/PWM.o
+                  0x00133c                  _InitPWM
+                  0x001374                  _PWMUpdateSpeed
+ .text            0x0014b6        0x11a build/default/production/ToolBox.o
+                  0x0014b6                  _Abs
+                  0x0014e2                  _Max
+                  0x001516                  _Min
+                  0x00154a                  _LimitToInterval
+                  0x0015a0                  _RadianToDegree
+                  0x0015b8                  _DegreeToRadian
+ .text            0x0015d0         0x94 build/default/production/ADC.o
+                  0x0015d0                  _InitADC1
+                  0x001644                  _ADC1StartConversionSequence
+                  0x00164c                  _ADCGetResult
+                  0x001654                  _ADCIsConversionFinished
+                  0x00165c                  _ADCClearConversionFinishedFlag
+ .text            0x001664         0x56 build/default/production/ChipConfig.o
+                  0x001664                  _InitOscillator
+ .text            0x0016ba         0x30 build/default/production/Robot.o
+                  0x0016ba                  _PWMSetSpeedConsigne
+ .text            0x0016ea         0x2c build/default/production/IO.o
+                  0x0016ea                  _InitIO
 
-.dinit            0x00177e         0x2a
- .dinit           0x00177e         0x2a data_init
+.dinit            0x001716         0x2a
+ .dinit           0x001716         0x2a data_init

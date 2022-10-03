@@ -38,6 +38,8 @@ void SetNextRobotStateInAutomaticMode();
 #define STATE_RALENTIT_DROIT_EN_COURS 23
 #define STATE_RALENTIT_CENTRE 24
 #define STATE_RALENTIT_CENTRE_EN_COURS 25
+#define STATE_TOURNE_SUR_SOI 26
+#define STATE_TOURNE_SUR_SOI_EN_COURS 27
 
 
 
@@ -50,6 +52,7 @@ void SetNextRobotStateInAutomaticMode();
 #define OBSTACLE_A_GAUCHE_PROCHE 6
 #define OBSTACLE_A_DROIT_PROCHE 7
 #define OBSTACLE_EN_FACE_PROCHE 8
+#define OBSTACLE_PARTOUT 9
 
 
 #endif	/* MAIN_H */
