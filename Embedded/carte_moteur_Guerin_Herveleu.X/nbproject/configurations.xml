@@ -46,7 +46,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.70</languageToolchainVersion>
+        <languageToolchainVersion>2.00</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -217,6 +217,9 @@
         <property key="programmerToGoFilePath"
                   value="C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/debug/default/carte_moteur_Guerin_Herveleu_ptg"/>
       </ICD4Tool>
+      <Tool>
+        <property key="firmware.download.all" value="false"/>
+      </Tool>
     </conf>
   </confs>
 </configurationDescriptor>
