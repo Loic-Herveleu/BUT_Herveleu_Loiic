@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExtendedSerialPort\ExtendedSerialPort.csproj">
+      <Project>{21AC599E-E3D5-4181-AA0F-7C2E00CCA016}</Project>
+      <Name>ExtendedSerialPort</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
