@@ -18,11 +18,13 @@ using System.Windows.Threading;
 
 namespace RobotInterface
 {
+
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        Robot robot = new Robot();
         ReliableSerialPort serialPort1;
         public MainWindow()
         {
@@ -40,18 +42,18 @@ namespace RobotInterface
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if(receivedText !="")
+            if(robot.receivedText !="")
             {
                 TextBoxReception.Text += "Port serie :";
-                TextBoxReception.Text += receivedText;
-                receivedText="";
+                TextBoxReception.Text += robot.receivedText;
+                robot.receivedText="";
             }
         }
 
-        string receivedText="";
+
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
 
         }
 
