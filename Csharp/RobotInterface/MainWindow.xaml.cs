@@ -92,5 +92,15 @@ namespace RobotInterface
         {
             TextBoxReception.Text = "";
         }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            byte [] byteList=new byte [20];
+            for (int i= 0; i < 20; i++)
+            {
+                byteList[i] = (byte)(2 * i);
+            }
+            serialPort1.Write(byteList);
+        }
     }
 }
