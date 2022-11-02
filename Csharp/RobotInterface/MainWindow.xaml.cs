@@ -27,16 +27,28 @@ namespace RobotInterface
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
+
             DispatcherTimer timerAffichage;
             timerAffichage = new DispatcherTimer();
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
         }
-        string receivedText;
+
+        private void TimerAffichage_Tick(object sender, EventArgs e)
+        {
+            if(receivedText !="")
+            {
+                TextBoxReception.Text += "Port serie :";
+                TextBoxReception.Text += receivedText;
+                receivedText="";
+            }
+        }
+
+        string receivedText="";
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
             receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
@@ -72,6 +84,11 @@ namespace RobotInterface
                 SendMessage();
 
             }
+        }
+
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxReception.Text = "";
         }
     }
 }
