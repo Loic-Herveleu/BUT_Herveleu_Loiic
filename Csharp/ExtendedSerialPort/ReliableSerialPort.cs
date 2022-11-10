@@ -48,10 +48,7 @@ namespace ExtendedSerialPort
             }
         }
 
-        public void Write(byte[] byteList)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 
     public class DataReceivedArgs : EventArgs
