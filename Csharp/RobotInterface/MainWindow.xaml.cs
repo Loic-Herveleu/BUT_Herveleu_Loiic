@@ -42,11 +42,16 @@ namespace RobotInterface
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if(robot.receivedText !="")
-            {
+            //if(robot.receivedText !="")
+            //{
             //    TextBoxReception.Text += "Port serie :";
-                TextBoxReception.Text += robot.receivedText;
-                robot.receivedText="";
+            //    TextBoxReception.Text += robot.receivedText;
+            //    robot.receivedText="";
+            //}
+            while (robot.byteListReceived.Count !=0)
+            {
+                var c = robot.byteListReceived.Dequeue();
+                TextBoxReception.Text += "0x" + c.ToString("X2") + " ";
             }
         }
 
@@ -71,7 +76,6 @@ namespace RobotInterface
             }
             toggle = !toggle;
             SendMessage();
-
         }
         private void SendMessage()
         {
