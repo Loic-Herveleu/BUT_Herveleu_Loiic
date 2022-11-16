@@ -62,5 +62,11 @@ void InitIO() {
     _TRISE15 = 1;
 
     _TRISB1 = 1;
+    
+    
+    //********* Configuration liaison série *********************************************
+    
+    _U1RXR= 24; //Remappe RPI24 sur l'entrée rx
+    _RP36R=0b00001; // Remappe la sortie Tx vers RP36
 
 }

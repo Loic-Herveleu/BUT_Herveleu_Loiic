@@ -39,6 +39,10 @@ int main(void) {
     // Boucle Principale
     InitPWM();
     InitADC1();
+    InitUART();
+    
+    //SendMessageDirect((unsigned char*) "Bonjour",7);
+    //__delay32(40000000);
     /****************************************************************************************************/
     while (1) {
 
@@ -55,6 +59,9 @@ int main(void) {
         //}
         //-----------------------------------------------
 
+    
+        
+        
         if (ADCIsConversionFinished()) {
             ADCClearConversionFinishedFlag();
             ;
