@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/timer.h</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/PWM.h</file>
+            <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/CB_TX1.c</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/IO.c</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/timer.c</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/main.h</file>
+            <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/CB_TX1.h</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/nbproject/Makefile-default.mk</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/ChipConfig.c</file>
             <file>file:/C:/Github/BUT_Herveleu_Loiic/Embedded/carte_moteur_Guerin_Herveleu.X/brouillonstrat.c</file>
