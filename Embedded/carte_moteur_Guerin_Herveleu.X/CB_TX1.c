@@ -4,8 +4,8 @@
 #include "CB_TX1.h"
 #define CBTX1_BUFFER_SIZE 128
 
-int cbTx1Head;
-int cbTx1Tail;
+int cbTx1Head=0;
+int cbTx1Tail=0;
 unsigned char cbTx1Buffer[CBTX1_BUFFER_SIZE];
 unsigned char isTransmitting = 0;
 
@@ -58,6 +58,6 @@ unsigned char CB_TX1_IsTranmitting(void)
 int CB_TX1_RemainingSize(void)
 {
 int rSize;
-..
+
 return rSize;
 }
