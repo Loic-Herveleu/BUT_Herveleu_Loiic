@@ -13,9 +13,9 @@ U1MODEbits.BRGH = 1; // Low Speed mode
 U1BRG = BRGVAL; // BAUD Rate Setting
 
 U1STAbits.UTXISEL0 = 0; // Interrupt after one Tx character is transmitted
-U1STAbits.UTXISEL1 = 1;
+U1STAbits.UTXISEL1 = 0;
 IFS0bits.U1TXIF = 0; // clear TX interrupt flag
-IEC0bits.U1TXIE = 0; // Disable UART Tx interrupt
+IEC0bits.U1TXIE = 1; // Disable UART Tx interrupt
 
 U1STAbits.URXISEL = 0b00; // Interrupt after one RX character is received;
 IFS0bits.U1RXIF = 0; // clear RX interrupt flag
