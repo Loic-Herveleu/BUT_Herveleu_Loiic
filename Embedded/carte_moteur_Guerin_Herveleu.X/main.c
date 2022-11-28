@@ -10,6 +10,8 @@
 #include "main.h"
 #include "CB_TX1.h"
 #include "UART.h"
+#include <libpic30.h>
+
 
 unsigned int ADCValue0;
 unsigned int ADCValue1;
@@ -45,6 +47,15 @@ int main(void) {
     SendMessage((unsigned char*)"Bonjour",7);
     /****************************************************************************************************/
     while (1) {
+        
+        
+        int i;
+        for(i=0; i< CB_RX1_GetDataSize();i++)
+        {
+            unsigned char c = CB_RX1_Get();
+            SendMessage(&c,1);
+        }
+        __delay32(1000);
 
         //LED_BLANCHE = !LED_BLANCHE;
         //LED_BLEUE = !LED_BLEUE;
