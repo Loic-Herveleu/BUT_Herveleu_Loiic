@@ -9,6 +9,8 @@
 
 #ifndef MAIN_H
 #define	MAIN_H
+
+
 void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode();
 
@@ -40,8 +42,6 @@ void SetNextRobotStateInAutomaticMode();
 #define STATE_RALENTIT_CENTRE_EN_COURS 25
 #define STATE_TOURNE_SUR_SOI 26
 #define STATE_TOURNE_SUR_SOI_EN_COURS 27
-#define STATE_RECULE 28
-#define STATE_RECULE_EN_COURS 29
 
 
 

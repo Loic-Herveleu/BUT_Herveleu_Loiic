@@ -5,6 +5,7 @@
 #include "Robot.h"
 #include "ADC.h"
 #include "main.h"
+
 int sens = 0;
 int etat = 0;
 unsigned long timestamp = 0;
@@ -77,7 +78,7 @@ void InitTimer1(void) {
     IFS0bits.T1IF = 0; // Clear Timer Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer interrupt
     T1CONbits.TON = 1; // Enable Timer
-    SetFreqTimer1(5000);
+    SetFreqTimer1(1000);
 }
 
 //Initialisation timer4
@@ -103,8 +104,8 @@ void InitTimer4(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     IFS1bits.T4IF = 0;
-    timestamp = timestamp + 1;
-OperatingSystemLoop();
+    timestamp ++;
+    OperatingSystemLoop();
 }
 
 //Interruption du timer 1
@@ -143,11 +144,11 @@ void SetFreqTimer4(float freq) {
             T4CONbits.TCKPS = 0b10; //10 = 1:64 prescaler value
             if (FCY / freq / 64 > 65535) {
                 T4CONbits.TCKPS = 0b11; //11 = 1:256 prescaler value
-                PR1 = (int) (FCY / freq / 256);
+                PR4 = (int) (FCY / freq / 256);
             } else
-                PR1 = (int) (FCY / freq / 64);
+                PR4 = (int) (FCY / freq / 64);
         } else
-            PR1 = (int) (FCY / freq / 8);
+            PR4 = (int) (FCY / freq / 8);
     } else
-        PR1 = (int) (FCY / freq);
+        PR4 = (int) (FCY / freq);
 }

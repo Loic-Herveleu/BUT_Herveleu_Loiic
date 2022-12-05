@@ -12,7 +12,6 @@
 #include "UART.h"
 #include <libpic30.h>
 
-
 unsigned int ADCValue0;
 unsigned int ADCValue1;
 unsigned int ADCValue2;
@@ -44,36 +43,11 @@ int main(void) {
     InitPWM();
     InitADC1();
     InitUART();
-    SendMessage((unsigned char*)"Bonjour",7);
+
     /****************************************************************************************************/
     while (1) {
-        
-        
-        int i;
-        for(i=0; i< CB_RX1_GetDataSize();i++)
-        {
-            unsigned char c = CB_RX1_Get();
-            SendMessage(&c,1);
-        }
-        __delay32(1000);
-
-        //LED_BLANCHE = !LED_BLANCHE;
-        //LED_BLEUE = !LED_BLEUE;
-        //LED_ORANGE = !LED_ORANGE;
-        //-----------------------------------------------
-        //if (ADCIsConversionFinished()) {
-        //ADCClearConversionFinishedFlag();
-        //unsigned int * result = ADCGetResult();
-        //ADCValue0=result[0];
-        //ADCValue1=result[1];
-        //ADCValue2=result[2];
-        //}
-        //-----------------------------------------------
-
-    
-        
-        
         if (ADCIsConversionFinished()) {
+
             ADCClearConversionFinishedFlag();
             ;
             unsigned int *result = ADCGetResult();
@@ -88,31 +62,32 @@ int main(void) {
             volts = ((float) result[0]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreEXTDroit = 34 / volts - 5;
 
-        }
+            if (robotState.distanceTelemetreGauche < 30) {
+                LED_ORANGE = 1;
+            } else {
+                LED_ORANGE = 0;
+            }
+            //----------------------------------------
+            if (robotState.distanceTelemetreCentre < 30) {
+                LED_BLEUE = 1;
+            } else {
+                LED_BLEUE = 0;
+            }
+            //----------------------------------------
+            //            if (robotState.distanceTelemetreDroit < 30) {
+            //                LED_BLANCHE = 1;
+            //            } else {
+            //                LED_BLANCHE = 0;
+            //            }
 
-        if (robotState.distanceTelemetreGauche < 30) {
-            LED_ORANGE = 1;
-        } else {
-            LED_ORANGE = 0;
-        }
-        //----------------------------------------
-        if (robotState.distanceTelemetreCentre < 30) {
-            LED_BLEUE = 1;
-        } else {
-            LED_BLEUE = 0;
-        }
-        //----------------------------------------
-        if (robotState.distanceTelemetreDroit < 30) {
-            LED_BLANCHE = 1;
-        } else {
-            LED_BLANCHE = 0;
+            SendMessage((unsigned char*) "Bonjour", 7);
         }
     }
     // fin main
 }
 //Fonction Operating
 
-void OperatingSystemLoop(void) {
+void OperatingSystemLoop(void) { 
     switch (stateRobot) {
         case STATE_ATTENTE:
             timestamp = 0;
@@ -126,8 +101,8 @@ void OperatingSystemLoop(void) {
             break;
 
         case STATE_AVANCE:
-            PWMSetSpeedConsigne(25, MOTEUR_D);
-            PWMSetSpeedConsigne(25, MOTEUR_G);
+            PWMSetSpeedConsigne(25.0, MOTEUR_D);
+            PWMSetSpeedConsigne(25.0, MOTEUR_G);
             stateRobot = STATE_AVANCE_EN_COURS;
             break;
 
@@ -137,7 +112,7 @@ void OperatingSystemLoop(void) {
 
         case STATE_TOURNE_GAUCHE:
 
-            PWMSetSpeedConsigne(21, MOTEUR_D);
+            PWMSetSpeedConsigne(21.0, MOTEUR_D);
             PWMSetSpeedConsigne(0, MOTEUR_G);
             stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
             break;
@@ -149,7 +124,7 @@ void OperatingSystemLoop(void) {
         case STATE_TOURNE_DROITE:
 
             PWMSetSpeedConsigne(0, MOTEUR_D);
-            PWMSetSpeedConsigne(21, MOTEUR_G);
+            PWMSetSpeedConsigne(21.0, MOTEUR_G);
             stateRobot = STATE_TOURNE_DROITE_EN_COURS;
             break;
 
@@ -158,8 +133,8 @@ void OperatingSystemLoop(void) {
             break;
 
         case STATE_TOURNE_SUR_PLACE_GAUCHE:
-            PWMSetSpeedConsigne(-20, MOTEUR_D);
-            PWMSetSpeedConsigne(20, MOTEUR_G);
+            PWMSetSpeedConsigne(-20.0, MOTEUR_D);
+            PWMSetSpeedConsigne(20.0, MOTEUR_G);
             stateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS;
             break;
 
@@ -168,8 +143,8 @@ void OperatingSystemLoop(void) {
             break;
 
         case STATE_TOURNE_SUR_PLACE_DROITE:
-            PWMSetSpeedConsigne(20, MOTEUR_D);
-            PWMSetSpeedConsigne(-20, MOTEUR_G);
+            PWMSetSpeedConsigne(20.0, MOTEUR_D);
+            PWMSetSpeedConsigne(-20.0, MOTEUR_G);
             stateRobot = STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS;
             break;
 
@@ -178,8 +153,8 @@ void OperatingSystemLoop(void) {
             break;
 
         case STATE_RECULE:
-            PWMSetSpeedConsigne(-10, MOTEUR_D);
-            PWMSetSpeedConsigne(-10, MOTEUR_G);
+            PWMSetSpeedConsigne(-10.0, MOTEUR_D);
+            PWMSetSpeedConsigne(-10.0, MOTEUR_G);
             stateRobot = STATE_RECULE_EN_COURS;
             break;
 
