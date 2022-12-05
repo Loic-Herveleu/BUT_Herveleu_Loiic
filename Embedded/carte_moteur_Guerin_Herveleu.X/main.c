@@ -43,9 +43,10 @@ int main(void) {
     InitPWM();
     InitADC1();
     InitUART();
-
+            SendMessage((unsigned char*) "Bonjour", 7);
     /****************************************************************************************************/
     while (1) {
+        SendMessage((unsigned char*) "Bonjour", 7);
         if (ADCIsConversionFinished()) {
 
             ADCClearConversionFinishedFlag();
@@ -80,7 +81,7 @@ int main(void) {
             //                LED_BLANCHE = 0;
             //            }
 
-            SendMessage((unsigned char*) "Bonjour", 7);
+
         }
     }
     // fin main
