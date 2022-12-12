@@ -108,7 +108,10 @@ namespace RobotInterface
             //serialPort1.Write(byteList,0,20);
 
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
+            //byte[] ledTest = { 0x00, 0x01 };
             UartEncodeAndSendMessage(0x0080, 7, array);
+           // ProcessDecodedMessage(0x0080, 7, array);
+            //ProcessDecodedMessage(0x0020, 2, ledTest);
         }
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
@@ -173,28 +176,28 @@ namespace RobotInterface
 
                 case StateReception.FunctionMSB:
 
-                    msgDecodedFunction += c << 8;
+                    msgDecodedFunction = c << 8;
                     rcvState = StateReception.FunctionLSB;
 
                     break;
 
                 case StateReception.FunctionLSB:
 
-                    msgDecodedFunction += c << 0;
+                    msgDecodedFunction = c << 0;
                     rcvState = StateReception.PayloadLengthMSB;
 
                     break;
 
                 case StateReception.PayloadLengthMSB:
 
-                    msgDecodedPayloadLength += c << 8;
+                    msgDecodedPayloadLength = c << 8;
                     rcvState = StateReception.PayloadLengthLSB;
 
                     break;
 
                 case StateReception.PayloadLengthLSB:
 
-                    msgDecodedPayloadLength += c << 0;
+                    msgDecodedPayloadLength = c << 0;
                     msgDecodedPayload= new byte[msgDecodedPayloadLength];
                     msgDecodedPayloadIndex = 0;
                     rcvState = StateReception.Payload;
@@ -229,6 +232,80 @@ namespace RobotInterface
                 default:
                     rcvState = StateReception.Waiting;
                     break;
+            }
+        }
+
+        public enum Function
+        {
+            Texte = 0x0080,
+            Led = 0x0020,
+            DistanceTelemetre = 0x0030,
+            Vitesse = 0x0040
+        }
+
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch ((Function)msgFunction)
+            {
+
+                case Function.Texte:
+                    TextBoxReception.Text += Encoding.UTF8.GetString(msgPayload, 0, msgPayloadLength);
+                    break;
+
+                case Function.Led:
+                    switch(msgPayload[0])
+                    {
+                        case 0: 
+
+                            if (msgPayload[1] == 0x00)
+                            {
+                                checkBoxLed1.IsChecked = false;
+                            }
+                            else if(msgPayload[1] == 0x01)
+                            {
+                                checkBoxLed1.IsChecked = true;
+                            }
+                            break;
+
+                        case 1:
+
+                            if (msgPayload[1] == 0x00)
+                            {
+                                checkBoxLed1.IsChecked = false;
+                            }
+                            else if (msgPayload[1] == 0x01)
+                            {
+                                checkBoxLed1.IsChecked = true;
+                            }
+                            break;
+
+                        case 2:
+
+                            if (msgPayload[1] == 0x00)
+                            {
+                                checkBoxLed1.IsChecked = false;
+                            }
+                            else if (msgPayload[1] == 0x01)
+                            {
+                                checkBoxLed1.IsChecked = true;
+                            }
+                            break;
+
+                    }
+                    break;
+
+                case Function.DistanceTelemetre:
+
+                    labelIRC.Content = msgPayload[2];
+                    labelIRG.Content = msgPayload[1];
+                    labelIRD.Content = msgPayload[3];
+                    break;
+
+                case Function.Vitesse:
+                    labelVG.Content = msgPayload[1];
+                    labelVD.Content = msgPayload[1];
+                    break;
+
             }
         }
     }
