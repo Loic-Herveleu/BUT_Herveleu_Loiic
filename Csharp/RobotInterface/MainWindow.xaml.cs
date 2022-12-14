@@ -82,6 +82,7 @@ namespace RobotInterface
         {
             serialPort1.WriteLine(TextBoxEmission.Text);
             TextBoxEmission.Text = "";
+
         }
 
         private void TextBoxEmission_KeyUp(object sender, KeyEventArgs e)
@@ -108,10 +109,10 @@ namespace RobotInterface
             //serialPort1.Write(byteList,0,20);
 
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
-            //byte[] ledTest = { 0x00, 0x01 };
-            UartEncodeAndSendMessage(0x0080, 7, array);
+            //byte[] ledTest = { 0x00, 0x01, 0x02 };
+            //UartEncodeAndSendMessage(0x0080, 7, array);
            // ProcessDecodedMessage(0x0080, 7, array);
-            //ProcessDecodedMessage(0x0020, 2, ledTest);
+          //  ProcessDecodedMessage(0x0030, 3, ledTest);
         }
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
@@ -225,6 +226,7 @@ namespace RobotInterface
                     if (CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload) == c)
                     {
                         TextBoxReception.Text += "OK\n";
+                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     }
                     rcvState = StateReception.Waiting;
                     break;
@@ -240,8 +242,29 @@ namespace RobotInterface
             Texte = 0x0080,
             Led = 0x0020,
             DistanceTelemetre = 0x0030,
-            Vitesse = 0x0040
+            Vitesse = 0x0040,
+            RobotState= 0x0050
         }
+        public enum StateRobot
+        {
+            STATE_ATTENTE = 0,
+            STATE_ATTENTE_EN_COURS = 1,
+            STATE_AVANCE = 2,
+            STATE_AVANCE_EN_COURS = 3,
+            STATE_TOURNE_GAUCHE = 4,
+            STATE_TOURNE_GAUCHE_EN_COURS = 5,
+            STATE_TOURNE_DROITE = 6,
+            STATE_TOURNE_DROITE_EN_COURS = 7,
+            STATE_TOURNE_SUR_PLACE_GAUCHE = 8,
+            STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS = 9,
+            STATE_TOURNE_SUR_PLACE_DROITE = 10,
+            STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS = 11,
+            STATE_ARRET = 12,
+            STATE_ARRET_EN_COURS = 13,
+            STATE_RECULE = 14,
+            STATE_RECULE_EN_COURS = 15
+        }
+
 
         void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
@@ -296,15 +319,22 @@ namespace RobotInterface
 
                 case Function.DistanceTelemetre:
 
-                    labelIRC.Content = msgPayload[2];
-                    labelIRG.Content = msgPayload[1];
-                    labelIRD.Content = msgPayload[3];
+                    labelIRC.Content = msgPayload[1];
+                    labelIRG.Content = msgPayload[0];
+                    labelIRD.Content = msgPayload[2];
                     break;
 
                 case Function.Vitesse:
                     labelVG.Content = msgPayload[1];
-                    labelVD.Content = msgPayload[1];
+                    labelVD.Content = msgPayload[0];
                     break;
+
+                case Function.RobotState:
+
+                    int instant = (((int)msgPayload[1]) << 24) + (((int)msgPayload[2]) << 16) + (((int)msgPayload[3]) << 8) + ((int)msgPayload[4]);
+                    TextBoxReception.Text += "\nRobot␣State␣:␣" + ((StateRobot)(msgPayload[0])).ToString() + "␣-␣" + instant.ToString() + "␣ms";
+                    break;
+
 
             }
         }

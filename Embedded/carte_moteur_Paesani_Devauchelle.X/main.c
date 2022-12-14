@@ -12,6 +12,7 @@
 #include "UART.h"
 #include "CB_TX1.h"
 #include "CB_RX1.h"
+#include "UART_Protocol.h"
 #include <libpic30.h>
 
 unsigned int ADCValue0;
@@ -20,6 +21,8 @@ unsigned int ADCValue2;
 unsigned int ADCValue3;
 unsigned int ADCValue4;
 unsigned char stateRobot;
+unsigned char uartIR[3];
+unsigned char etatrobot[5];
 
 int main(void) {
     /***************************************************************************************************/
@@ -63,13 +66,15 @@ int main(void) {
     // Boucle Principale
     /****************************************************************************************************/
     while (1) {
-        SendMessage((unsigned char*)"Bonjour loopback", 16);
+ //       SendMessage((unsigned char*)"Bonjour loopback", 16);
 //        int i;
 //        for(i=0; i<CB_RX1_GetDataSize(); i++){
 //            unsigned char c = CB_RX1_Get();
 //            SendMessage(&c,1);
 //        }
-//        __delay32(10000);
+//        unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+//        UartEncodeAndSendMessage(0x0080,7, payload);
+//            __delay32(40000000);
 //        
         if (ADCIsConversionFinished()) {
             ADCClearConversionFinishedFlag();
@@ -91,6 +96,14 @@ int main(void) {
             robotState.distanceTelemetreGauche = 34 / volts - 5;
             volts = ((float) result [3])* 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExGauche = 34 / volts - 5;
+            
+            uartIR[0]= (unsigned char)(robotState.distanceTelemetreGauche);
+            uartIR[1]= (unsigned char)(robotState.distanceTelemetreCentre);
+            uartIR[2]= (unsigned char)(robotState.distanceTelemetreDroit);
+
+           // UartEncodeAndSendMessage(0x0030,3, uartIR);
+            //__delay32(40000000);
+
 
             if (robotState.distanceTelemetreCentre < 10) {
                 robotState.distanceTelemetreCentre = 10;
@@ -270,6 +283,15 @@ void SetNextRobotStateInAutomaticMode() {
     }
     //Si l'on n?est pas dans la transition de l?étape en cours
     if (nextStateRobot != stateRobot - 1) {
+        
+        etatrobot[0]=(unsigned char)(nextStateRobot);
+        etatrobot[1]=(unsigned char)(timestamp>>24);
+        etatrobot[2]=(unsigned char)(timestamp>>16);
+        etatrobot[3]=(unsigned char)(timestamp>>8);
+        etatrobot[4]=(unsigned char)(timestamp>>0);
+        UartEncodeAndSendMessage(0x0050,5, etatrobot);
+        //__delay32(40000000);
+
         stateRobot = nextStateRobot;
     }
 }
