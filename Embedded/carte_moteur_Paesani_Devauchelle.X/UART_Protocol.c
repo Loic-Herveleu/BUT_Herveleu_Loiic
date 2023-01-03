@@ -38,17 +38,105 @@ int msgDecodedFunction = 0;
 int msgDecodedPayloadLength = 0;
 unsigned char msgDecodedPayload[128];
 int msgDecodedPayloadIndex = 0;
-//void UartDecodeMessage(unsigned char c)
-//{
-////Fonction prenant en entree un octet et servant a reconstituer les trames
-//...
-//}
-//void UartProcessDecodedMessage(int function,int payloadLength, unsigned char* payload)
-//{
-////Fonction appelee apres le decodage pour executer l?action
-////correspondant au message recu
-//...
-//}
+int rcvState=0;
+
+void UartDecodeMessage(unsigned char c)
+{
+        {
+            switch (rcvState)
+            {
+                case WAITING:
+
+                    if(c==0xFE)
+                    {
+                        rcvState =FUNCTIONMSB;
+                    }
+                    break;
+
+                case FUNCTIONMSB:
+
+                    msgDecodedFunction = c << 8;
+                    rcvState = FUNCTIONLSB;
+
+                    break;
+
+                case FUNCTIONLSB:
+
+                    msgDecodedFunction = c << 0;
+                    rcvState = PAYLOADLENGTHMSB;
+
+                    break;
+
+                case PAYLOADLENGTHMSB:
+
+                    msgDecodedPayloadLength = c << 8;
+                    rcvState =PAYLOADLENGTHLSB;
+
+                    break;
+
+                case PAYLOADLENGTHLSB:
+
+                    msgDecodedPayloadLength = c << 0;
+                    msgDecodedPayload[msgDecodedPayloadLength];
+                    msgDecodedPayloadIndex = 0;
+                    rcvState = PAYLOAD;
+
+                    break;
+
+                case PAYLOAD:
+
+                    if(msgDecodedPayloadIndex<msgDecodedPayloadLength)
+                    {
+                        msgDecodedPayload[msgDecodedPayloadIndex] = c;
+                        msgDecodedPayloadIndex++;
+
+                        if (msgDecodedPayloadIndex == msgDecodedPayloadLength)
+                        {
+                            rcvState = CHECKSUM;
+                        }
+                    }
+
+
+                    break;
+
+                case CHECKSUM:
+
+                    if (UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload) == c)
+                    {
+                       UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                    }
+                    rcvState = WAITING;
+                    break;
+
+                default:
+                    rcvState = WAITING;
+                    break;
+            }
+        }     
+}
+void UartProcessDecodedMessage(int function,int payloadLength, unsigned char* payload)
+{
+switch (function)
+{
+case SET_ROBOT_STATE:SetRobotState(payload[0]);
+break;
+case SET_ROBOT_MANUAL_CONTROL: SetRobotAutoControlState(payload[0]);
+break;
+
+default:
+break;
+}
+}
 //*************************************************************************/
 //Fonctions correspondant aux messages
 //*************************************************************************/
+void SetRobotState(uint8_t state)
+{
+    if ()
+}
+
+void SetRobotAutoControlState(int state)
+{
+   
+    
+}

@@ -110,7 +110,7 @@ namespace RobotInterface
 
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
             //byte[] ledTest = { 0x00, 0x01, 0x02 };
-            //UartEncodeAndSendMessage(0x0080, 7, array);
+            UartEncodeAndSendMessage(0x0080, 7, array);
            // ProcessDecodedMessage(0x0080, 7, array);
           //  ProcessDecodedMessage(0x0030, 3, ledTest);
         }
