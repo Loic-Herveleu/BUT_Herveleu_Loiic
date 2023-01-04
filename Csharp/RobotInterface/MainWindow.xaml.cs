@@ -15,6 +15,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using MouseKeyboardActivityMonitor.WinApi;
+using MouseKeyboardActivityMonitor;
+using System.Windows.Forms;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
 namespace RobotInterface
 {
@@ -26,6 +30,8 @@ namespace RobotInterface
     {
         Robot robot = new Robot();
         ReliableSerialPort serialPort1;
+        private readonly KeyboardHookListener m_KeyboardHookManager;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +44,44 @@ namespace RobotInterface
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
+
+            m_KeyboardHookManager = new KeyboardHookListener(new GlobalHooker());
+            m_KeyboardHookManager.Enabled = true;
+            m_KeyboardHookManager.KeyDown += M_KeyboardHookManager_KeyDown;
+        }
+
+        private void M_KeyboardHookManager_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (robot.autoControlActivated == false)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        UartEncodeAndSendMessage(0x0051, 1, new byte[]
+                        { (byte)StateRobot.STATE_TOURNE_SUR_PLACE_GAUCHE });
+                        break;
+
+                    case Keys.Right:
+                        UartEncodeAndSendMessage(0x0051, 1, new byte[]
+                        { (byte)StateRobot.STATE_TOURNE_SUR_PLACE_DROITE });
+                        break;
+
+                    case Keys.Up:
+                        UartEncodeAndSendMessage(0x0051, 1, new byte[]
+                        { (byte)StateRobot.STATE_AVANCE });
+                        break;
+
+                    case Keys.Down:
+                        UartEncodeAndSendMessage(0x0051, 1, new byte[]
+                        { (byte)StateRobot.STATE_ARRET });
+                        break;
+
+                    case Keys.PageDown:
+                        UartEncodeAndSendMessage(0x0051, 1, new byte[]
+                        { (byte)StateRobot.STATE_RECULE });
+                        break;
+                }
+            }
         }
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
@@ -48,7 +92,7 @@ namespace RobotInterface
             //    TextBoxReception.Text += robot.receivedText;
             //    robot.receivedText="";
             //}
-            while (robot.byteListReceived.Count !=0)
+            while (robot.byteListReceived.Count != 0)
             {
                 var c = robot.byteListReceived.Dequeue();
                 TextBoxReception.Text += "0x" + c.ToString("X2") + " ";
@@ -69,7 +113,7 @@ namespace RobotInterface
         {
             if (toggle)
             {
-                buttonEnvoyer.Background = Brushes.RoyalBlue;                
+                buttonEnvoyer.Background = Brushes.RoyalBlue;
             }
             else
             {
@@ -85,7 +129,7 @@ namespace RobotInterface
 
         }
 
-        private void TextBoxEmission_KeyUp(object sender, KeyEventArgs e)
+        private void TextBoxEmission_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -111,19 +155,19 @@ namespace RobotInterface
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
             //byte[] ledTest = { 0x00, 0x01, 0x02 };
             UartEncodeAndSendMessage(0x0080, 7, array);
-           // ProcessDecodedMessage(0x0080, 7, array);
-          //  ProcessDecodedMessage(0x0030, 3, ledTest);
+            // ProcessDecodedMessage(0x0080, 7, array);
+            //  ProcessDecodedMessage(0x0030, 3, ledTest);
         }
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
             byte checksum = 0x00;
             checksum ^= 0xFE;
-            checksum ^= (byte)(msgFunction >>8);
+            checksum ^= (byte)(msgFunction >> 8);
             checksum ^= (byte)(msgFunction >> 0);
             checksum ^= (byte)(msgPayloadLength >> 8);
             checksum ^= (byte)(msgPayloadLength >> 0);
 
-            for(int i=0; i<msgPayloadLength;i++)
+            for (int i = 0; i < msgPayloadLength; i++)
             {
                 checksum ^= msgPayload[i];
             }
@@ -139,12 +183,12 @@ namespace RobotInterface
             message[pos++] = (byte)(msgPayloadLength >> 8);
             message[pos++] = (byte)(msgPayloadLength >> 0);
 
-            for(int i=0; i<msgPayloadLength; i++)
+            for (int i = 0; i < msgPayloadLength; i++)
             {
-                message[pos++]= msgPayload[i];
+                message[pos++] = msgPayload[i];
             }
-            message[pos] = CalculateChecksum(msgFunction, msgPayloadLength,msgPayload);
-            serialPort1.Write(message, 0, msgPayloadLength+6);
+            message[pos] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
+            serialPort1.Write(message, 0, msgPayloadLength + 6);
         }
         public enum StateReception
         {
@@ -169,7 +213,7 @@ namespace RobotInterface
             {
                 case StateReception.Waiting:
 
-                    if(c==0xFE)
+                    if (c == 0xFE)
                     {
                         rcvState = StateReception.FunctionMSB;
                     }
@@ -199,7 +243,7 @@ namespace RobotInterface
                 case StateReception.PayloadLengthLSB:
 
                     msgDecodedPayloadLength = c << 0;
-                    msgDecodedPayload= new byte[msgDecodedPayloadLength];
+                    msgDecodedPayload = new byte[msgDecodedPayloadLength];
                     msgDecodedPayloadIndex = 0;
                     rcvState = StateReception.Payload;
 
@@ -207,7 +251,7 @@ namespace RobotInterface
 
                 case StateReception.Payload:
 
-                    if(msgDecodedPayloadIndex<msgDecodedPayloadLength)
+                    if (msgDecodedPayloadIndex < msgDecodedPayloadLength)
                     {
                         msgDecodedPayload[msgDecodedPayloadIndex] = c;
                         msgDecodedPayloadIndex++;
@@ -243,7 +287,8 @@ namespace RobotInterface
             Led = 0x0020,
             DistanceTelemetre = 0x0030,
             Vitesse = 0x0040,
-            RobotState= 0x0050
+            RobotState = 0x0050,
+            ManuControl = 0x0052
         }
         public enum StateRobot
         {
@@ -276,15 +321,15 @@ namespace RobotInterface
                     break;
 
                 case Function.Led:
-                    switch(msgPayload[0])
+                    switch (msgPayload[0])
                     {
-                        case 0: 
+                        case 0:
 
                             if (msgPayload[1] == 0x00)
                             {
                                 checkBoxLed1.IsChecked = false;
                             }
-                            else if(msgPayload[1] == 0x01)
+                            else if (msgPayload[1] == 0x01)
                             {
                                 checkBoxLed1.IsChecked = true;
                             }
@@ -338,5 +383,19 @@ namespace RobotInterface
 
             }
         }
+
+        private void checkBoxMode_Checked(object sender, RoutedEventArgs e)
+        {
+            robot.autoControlActivated = false;
+            UartEncodeAndSendMessage((int)Function.ManuControl, 1, new byte[]{1});
+
+        }
+
+        private void checkBoxMode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            robot.autoControlActivated = true;
+            UartEncodeAndSendMessage((int)Function.ManuControl, 1, new byte[] { 0 });
+        }
     }
 }
+

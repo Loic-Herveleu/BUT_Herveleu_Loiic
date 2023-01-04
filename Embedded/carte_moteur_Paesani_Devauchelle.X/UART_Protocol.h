@@ -21,7 +21,11 @@ unsigned char UartCalculateChecksum(int msgFunction,int msgPayloadLength, unsign
 void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned char* msgPayload);
 void UartDecodeMessage(unsigned char c);
 void UartProcessDecodedMessage(int function,int payloadLength, unsigned char* payload);
+void SetRobotState(unsigned char payload);
+void SetRobotAutoControlState(unsigned char payload);
 
+
+extern unsigned char autoControlActivated;
 
 #endif	/* UART_PROTOCOL_H */
 
