@@ -4,9 +4,11 @@
 #include "PWM.h"
 #include "adc.h"
 #include "main.h"
+#include "QEI.h"
 
 uint16_t tour = 0;
 unsigned long timestamp=0;
+int compteur =0;
 //Initialisation d?un timer 32 bits
 
 void InitTimer23(void) {
@@ -56,7 +58,7 @@ void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) { //0,2Hz
 
 void InitTimer1(void) { //Fréquence de 150Hz
 
-    SetFreqTimer1(150);
+    SetFreqTimer1(250);
     //Timer1 pour horodater les mesures (1ms)
     T1CONbits.TON = 0; // Disable Timer
     //11 = 1:256 prescale value
@@ -77,6 +79,11 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     //LED_BLANCHE = !LED_BLANCHE;
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
+    QEIUpdateData();
+    compteur++;
+    if(compteur%25==0)
+    SendPositionData();
+
 }
 
 void InitTimer4(void) { //Fréquence de 150Hz
