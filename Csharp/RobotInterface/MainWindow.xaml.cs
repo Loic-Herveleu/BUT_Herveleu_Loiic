@@ -288,7 +288,8 @@ namespace RobotInterface
             DistanceTelemetre = 0x0030,
             Vitesse = 0x0040,
             RobotState = 0x0050,
-            ManuControl = 0x0052
+            ManuControl = 0x0052,
+            PositionData = 0x0061
         }
         public enum StateRobot
         {
@@ -377,10 +378,17 @@ namespace RobotInterface
                 case Function.RobotState:
 
                     int instant = (((int)msgPayload[1]) << 24) + (((int)msgPayload[2]) << 16) + (((int)msgPayload[3]) << 8) + ((int)msgPayload[4]);
-                    TextBoxReception.Text += "\nRobot␣State␣:␣" + ((StateRobot)(msgPayload[0])).ToString() + "␣-␣" + instant.ToString() + "␣ms";
+                    //TextBoxReception.Text += "\nRobot␣State␣:␣" + ((StateRobot)(msgPayload[0])).ToString() + "␣-␣" + instant.ToString() + "␣ms";
                     break;
 
+                case Function.PositionData:
 
+                    tab = msgPayload.GetRange(offset, 4);
+                    robot.positionXOdo += tab.GetFloat();
+
+                    //  int posData =
+                    TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
+                    break;
             }
         }
 
