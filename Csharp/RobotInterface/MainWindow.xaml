@@ -16,9 +16,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="338*"/>
-            <ColumnDefinition Width="57"/>
-            <ColumnDefinition Width="338*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="42"/>
+            <ColumnDefinition/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <GroupBox x:Name="Reception" Header="Reception" BorderBrush="Black" BorderThickness="2,6,2,2" Background="#FFF9F9F0" Grid.Column="3" Grid.Row="1">
@@ -27,46 +27,58 @@
         <GroupBox x:Name="Emission" Header="Emission" BorderThickness="2,6,2,2" BorderBrush="Black" Background="#FFF9F9F0" Grid.Column="1" Grid.Row="1">
             <TextBox x:Name="TextBoxEmission" Text="" TextWrapping="Wrap" BorderBrush="{x:Null}" Margin="0,0,0,0" AcceptsReturn="True"  Background="{x:Null}" KeyUp="TextBoxEmission_KeyUp"/>
         </GroupBox>
-        <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="1" HorizontalAlignment="center"  Grid.Row="3" Grid.RowSpan="1" Width="100" Click="buttonEnvoyer_Click" Background="#FFF9F9F0" BorderBrush="Black" BorderThickness="3" Margin="54,0,183,0" Height="36" VerticalAlignment="Top">
+        <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="1" HorizontalAlignment="center"  Grid.Row="3" Grid.RowSpan="1" Width="100" Click="buttonEnvoyer_Click" Background="#FFF9F9F0" BorderBrush="Black" BorderThickness="3" Margin="56,0,189,0" Height="36" VerticalAlignment="Top">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="buttonClear" Content="Clear" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Width="100" Click="buttonClear_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Margin="114,0,124,0" Height="36" VerticalAlignment="Top">
+        <Button x:Name="buttonClear" Content="Clear" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Width="100" Click="buttonClear_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Margin="62,0,183,0" Height="36" VerticalAlignment="Top">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="buttonTest" Content="Test" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" Width="95" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Margin="183,0,59,0" Height="36" VerticalAlignment="Bottom">
+        <Button x:Name="buttonTest" Content="Test" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" Width="94" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Margin="186,0,65,0" Height="36" VerticalAlignment="Bottom">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <CheckBox x:Name="checkBoxLed1" Content="Led1" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,70" Grid.Row="4" VerticalAlignment="Bottom" Cursor="AppStarting" Background="#FFA0ADFF"/>
-        <CheckBox x:Name="checkBoxLed2" Content="Led2" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,50" Grid.Row="4" VerticalAlignment="Bottom"/>
-        <CheckBox x:Name="checkBoxLed3" Content="Led3" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,30" Grid.Row="4" VerticalAlignment="Bottom" Background="#FFFFA8A8"/>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Grid.Column="1" HorizontalAlignment="Left" Margin="15,10,0,0" Grid.Row="4" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Grid.Column="1" HorizontalAlignment="Left" Margin="145,10,0,0" Grid.Row="4" VerticalAlignment="Top">
-            <GroupBox x:Name="groupBox" Header="Télémètres IR :" Height="95" Width="161" BorderBrush="#FFCFCFCF" BorderThickness="3">
-                <Label x:Name="labelIRG" Content="" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Width="47"/>
+        <CheckBox x:Name="checkBoxLed1" Content="Led1" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,70" Grid.Row="4" VerticalAlignment="Bottom" Cursor="AppStarting" Background="#FFA0ADFF" Height="15" Width="45"/>
+        <CheckBox x:Name="checkBoxLed2" Content="Led2" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,50" Grid.Row="4" VerticalAlignment="Bottom" Height="15" Width="45"/>
+        <CheckBox x:Name="checkBoxLed3" Content="Led3" Grid.Column="1" HorizontalAlignment="Left" Margin="25,0,0,30" Grid.Row="4" VerticalAlignment="Bottom" Background="#FFFFA8A8" Height="15" Width="45"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Height="5" Width="30"/>
+        <Label x:Name="label1" Grid.Column="1" HorizontalAlignment="Left" Margin="15,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="10" Width="10"/>
+        <Label x:Name="label2" Grid.Column="1" HorizontalAlignment="Left" Margin="145,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="105" Width="154">
+            <GroupBox x:Name="groupBox" Header="Télémètres IR :" Height="95" Width="144" BorderBrush="#FFCFCFCF" BorderThickness="3">
+                <Label x:Name="labelIRG" Content="" HorizontalAlignment="Left" Margin="83,0,0,46" Width="47"/>
             </GroupBox>
         </Label>
-        <Label x:Name="label3" Grid.Column="3" HorizontalAlignment="Left" Margin="13,10,0,0" Grid.Row="4" VerticalAlignment="Top">
-            <GroupBox x:Name="groupBox2" Header="Moteurs :" Height="95" Width="206" BorderThickness="3" BorderBrush="#FFEA0000"/>
+        <Label x:Name="label3" Grid.Column="3" HorizontalAlignment="Left" Margin="5,3,0,0" Grid.Row="4" VerticalAlignment="Top" Height="112" Width="191">
+            <GroupBox x:Name="groupBox2" Header="Vitesses :" Height="105" Width="181" BorderThickness="3" BorderBrush="#FFEA0000"/>
         </Label>
-        <Label x:Name="label4" Content="IR Gauche :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,35,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
-        <Label x:Name="label5" Content="IR Droit :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="label6" Content="IR Centre :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,55,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="label7" Content="Vitesse Gauche :" Grid.Column="3" HorizontalAlignment="Right" Margin="0,35,203,0" Grid.Row="4" VerticalAlignment="Top" Width="107"/>
-        <Label x:Name="label8" Content="Vitesse Droite :" Grid.Column="3" HorizontalAlignment="Left" Margin="28,55,0,0" Grid.Row="4" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="label9" Content="Vitesse Globale :" Grid.Column="3" HorizontalAlignment="Left" Margin="28,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="labelIRC" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="240,55,0,0" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-2.9,0.885" Width="48"/>
-        <Label x:Name="labelIRD" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="240,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="48"/>
-        <Label x:Name="labelVG" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="135,35,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="labelVD" Content="" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,139,45" Grid.Row="4" VerticalAlignment="Bottom" Width="59"/>
-        <Label x:Name="labelVglo" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="135,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64"/>
+        <Label x:Name="label4" Content="IR Gauche :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,35,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Height="26"/>
+        <Label x:Name="label5" Content="IR Droit :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64" Height="26"/>
+        <Label x:Name="label6" Content="IR Centre :" Grid.Column="1" HorizontalAlignment="Left" Margin="160,55,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64" Height="26"/>
+        <Label x:Name="label7" Content="Moteur Gauche :" Grid.Column="3" Margin="20,21,218,0" Grid.Row="4" VerticalAlignment="Top" Height="26"/>
+        <Label x:Name="label8" Content="Moteur Droite :" Grid.Column="3" HorizontalAlignment="Left" Margin="20,41,0,0" Grid.Row="4" VerticalAlignment="Top" Width="93" Height="26"/>
+        <Label x:Name="label9" Content="Vitesse linéaire:" Grid.Column="3" HorizontalAlignment="Left" Margin="20,61,0,0" Grid.Row="4" VerticalAlignment="Top" Width="93" Height="26"/>
+        <Label x:Name="labelIRC" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="240,55,0,0" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-2.9,0.885" Width="48" Height="26"/>
+        <Label x:Name="labelIRD" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="240,75,0,0" Grid.Row="4" VerticalAlignment="Top" Width="48" Height="26"/>
+        <Label x:Name="labelVG" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="127,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="51" Height="26"/>
+        <Label x:Name="labelVD" Content="" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,167,56" Grid.Row="4" VerticalAlignment="Bottom" Width="51" Height="26"/>
+        <Label x:Name="labelVLineaire" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="127,64,0,0" Grid.Row="4" VerticalAlignment="Top" Width="51" Height="26"/>
         <GroupBox x:Name="groupBox1" Grid.Column="1" Header="Leds:" HorizontalAlignment="Left" Height="95" Margin="10,15,0,0" Grid.Row="4" VerticalAlignment="Top" Width="100" BorderBrush="#FF009FFF" BorderThickness="3"/>
-        <CheckBox x:Name="checkBoxMode" Content="Mode Auto" Grid.Column="3" Margin="229,29,5,0" Grid.Row="4" VerticalAlignment="Top" Checked="checkBoxMode_Checked" Unchecked="checkBoxMode_Unchecked"/>
+        <CheckBox x:Name="checkBoxMode" Content="Mode Auto" Grid.Column="3" Margin="0,10,24,0" Grid.Row="3" Checked="checkBoxMode_Checked" Unchecked="checkBoxMode_Unchecked" Height="15" VerticalAlignment="Top" HorizontalAlignment="Right" Width="111"/>
+        <GroupBox x:Name="groupBox3" Grid.Column="3" Header="Positions :" HorizontalAlignment="Left" Height="110" Margin="195,6,0,0" Grid.Row="4" VerticalAlignment="Top" Width="140">
+            <Label x:Name="labelPosX" Content="" HorizontalAlignment="Left" Margin="62,-1,0,0" VerticalAlignment="Top" Width="53"/>
+        </GroupBox>
+        <Label x:Name="labelPosY" Content="" HorizontalAlignment="Left" Margin="263,46,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4" Width="53"/>
+        <Label x:Name="labelAngleRad" Content="" HorizontalAlignment="Left" Margin="263,67,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4" RenderTransformOrigin="0.579,-0.269" Width="53"/>
+        <Label x:Name="label10_Copy2" Content="PosX :" HorizontalAlignment="Left" Margin="201,20,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>
+        <Label x:Name="label10_Copy3" Content="PosY :" HorizontalAlignment="Left" Margin="201,44,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>
+        <Label x:Name="label10_Copy4" Content="Angle :" HorizontalAlignment="Left" Margin="201,66,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>
+        <Label x:Name="label9_Copy" Content="Vitesse angulaire:" Grid.Column="3" HorizontalAlignment="Left" Margin="20,80,0,0" Grid.Row="4" VerticalAlignment="Top" Width="102" Height="26"/>
+        <Label x:Name="labelVAngulaire" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="127,82,0,0" Grid.Row="4" VerticalAlignment="Top" Width="51" Height="26"/>
+        <Label x:Name="label10_Copy" Content="Timestamp :" HorizontalAlignment="Left" Margin="201,88,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>
+        <Label x:Name="labelTimestamp" Content="" HorizontalAlignment="Left" Margin="274,87,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4" RenderTransformOrigin="0.579,-0.269" Width="53"/>
     </Grid>
 </Window>

@@ -19,6 +19,7 @@ using MouseKeyboardActivityMonitor.WinApi;
 using MouseKeyboardActivityMonitor;
 using System.Windows.Forms;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
+using Utilities;
 
 namespace RobotInterface
 {
@@ -95,7 +96,7 @@ namespace RobotInterface
             while (robot.byteListReceived.Count != 0)
             {
                 var c = robot.byteListReceived.Dequeue();
-                TextBoxReception.Text += "0x" + c.ToString("X2") + " ";
+              //TextBoxReception.Text += "0x" + c.ToString("X2") + " ";
                 DecodeMessage(c);
             }
         }
@@ -383,11 +384,26 @@ namespace RobotInterface
 
                 case Function.PositionData:
 
-                    tab = msgPayload.GetRange(offset, 4);
-                    robot.positionXOdo += tab.GetFloat();
+                    robot.timestampOdo = (((int)msgPayload[0]) << 24) + (((int)msgPayload[1]) << 16) + (((int)msgPayload[2]) << 8) + ((int)msgPayload[3]);
+                    labelTimestamp.Content = robot.timestampOdo;
+                   
+                    robot.positionXOdo = BitConverter.ToSingle(msgPayload, 4);
+                    labelPosX.Content = robot.positionXOdo;
 
-                    //  int posData =
-                    TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
+                    robot.positionYOdo = BitConverter.ToSingle(msgPayload, 8);
+                    labelPosY.Content = robot.positionYOdo;
+
+                    robot.angleRadianOdo = BitConverter.ToSingle(msgPayload, 12);
+                    labelAngleRad.Content = robot.angleRadianOdo;
+
+                    robot.vitesseLineaireOdo = BitConverter.ToSingle(msgPayload, 16);
+                    labelVLineaire.Content = robot.vitesseLineaireOdo;
+
+                    robot.vitesseAngulaireOdo = BitConverter.ToSingle(msgPayload, 20);
+                    labelVAngulaire.Content = robot.vitesseAngulaireOdo;
+
+                    //  int posData = 
+                    //  TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
                     break;
             }
         }
