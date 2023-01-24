@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RobotInterface"
+        xmlns:oscillo="clr-namespace:WpfOscilloscopeControl;assembly=WpfOscilloscopeControl"
+
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -71,6 +73,8 @@
         <GroupBox x:Name="groupBox3" Grid.Column="3" Header="Positions :" HorizontalAlignment="Left" Height="110" Margin="195,6,0,0" Grid.Row="4" VerticalAlignment="Top" Width="140">
             <Label x:Name="labelPosX" Content="" HorizontalAlignment="Left" Margin="62,-1,0,0" VerticalAlignment="Top" Width="53"/>
         </GroupBox>
+        <oscillo:WpfOscilloscope x:Name="oscilloSpeed" HorizontalAlignment="Left" Width="677" Margin="31,43,0,76" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1"/>
+
         <Label x:Name="labelPosY" Content="" HorizontalAlignment="Left" Margin="263,46,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4" Width="53"/>
         <Label x:Name="labelAngleRad" Content="" HorizontalAlignment="Left" Margin="263,67,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4" RenderTransformOrigin="0.579,-0.269" Width="53"/>
         <Label x:Name="label10_Copy2" Content="PosX :" HorizontalAlignment="Left" Margin="201,20,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>

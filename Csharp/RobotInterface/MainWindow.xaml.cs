@@ -20,6 +20,7 @@ using MouseKeyboardActivityMonitor;
 using System.Windows.Forms;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 using Utilities;
+using WpfOscilloscopeControl;
 
 namespace RobotInterface
 {
@@ -49,6 +50,10 @@ namespace RobotInterface
             m_KeyboardHookManager = new KeyboardHookListener(new GlobalHooker());
             m_KeyboardHookManager.Enabled = true;
             m_KeyboardHookManager.KeyDown += M_KeyboardHookManager_KeyDown;
+
+            oscilloSpeed.AddOrUpdateLine(lineId, 200, "Ligne1");
+            oscilloSpeed.ChangeLineColor(lineId, Color.RoyalBlue);
+
         }
 
         private void M_KeyboardHookManager_KeyDown(object sender, KeyEventArgs e)
