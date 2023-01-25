@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 using Utilities;
 using WpfOscilloscopeControl;
+using WpfWorldMapDisplay; 
 
 namespace RobotInterface
 {
@@ -51,8 +52,8 @@ namespace RobotInterface
             m_KeyboardHookManager.Enabled = true;
             m_KeyboardHookManager.KeyDown += M_KeyboardHookManager_KeyDown;
 
-            oscilloSpeed.AddOrUpdateLine(lineId, 200, "Ligne1");
-            oscilloSpeed.ChangeLineColor(lineId, Color.RoyalBlue);
+            oscilloSpeed.AddOrUpdateLine(1, 200, "Ligne1");
+           // oscilloSpeed.ChangeLineColor(1, Color.RoyalBlue);
 
         }
 
@@ -98,6 +99,7 @@ namespace RobotInterface
             //    TextBoxReception.Text += robot.receivedText;
             //    robot.receivedText="";
             //}
+            oscilloSpeed.AddPointToLine(1, robot.timestampOdo, robot.positionXOdo);
             while (robot.byteListReceived.Count != 0)
             {
                 var c = robot.byteListReceived.Dequeue();
