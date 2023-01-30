@@ -378,14 +378,14 @@ namespace RobotInterface
 
                 case Function.DistanceTelemetre:
 
-                    labelIRC.Content = msgPayload[1];
-                    labelIRG.Content = msgPayload[0];
-                    labelIRD.Content = msgPayload[2];
+                    labelIRC.Content = "IR Centre : " + msgPayload[1] + " cm";
+                    labelIRG.Content = "IR Gauche : " + msgPayload[0] + " cm";
+                    labelIRD.Content = "IR Droit : " + msgPayload[2] + " cm";
                     break;
 
                 case Function.Vitesse:
-                    labelVG.Content = msgPayload[1];
-                    labelVD.Content = msgPayload[0];
+                    labelVG.Content = "Vitesse Gauche : " + msgPayload[1];
+                    labelVD.Content = "Vitesse Droite : " + msgPayload[0];
                     break;
 
                 case Function.RobotState:
@@ -397,22 +397,22 @@ namespace RobotInterface
                 case Function.PositionData:
 
                     robot.timestampOdo = (((int)msgPayload[0]) << 24) + (((int)msgPayload[1]) << 16) + (((int)msgPayload[2]) << 8) + ((int)msgPayload[3]);
-                    labelTimestamp.Content = robot.timestampOdo;
+                    labelTimestamp.Content = "Timestamp : " + robot.timestampOdo;
                    
                     robot.positionXOdo = BitConverter.ToSingle(msgPayload, 4);
-                    labelPosX.Content = robot.positionXOdo;
+                    labelPosX.Content = "PosX : " + robot.positionXOdo;
 
                     robot.positionYOdo = BitConverter.ToSingle(msgPayload, 8);
-                    labelPosY.Content = robot.positionYOdo;
+                    labelPosY.Content = "PosY : " + robot.positionYOdo;
 
                     robot.angleRadianOdo = BitConverter.ToSingle(msgPayload, 12);
-                    labelAngleRad.Content = robot.angleRadianOdo;
+                    labelAngleRad.Content = "Angle : " + robot.angleRadianOdo;
 
                     robot.vitesseLineaireOdo = BitConverter.ToSingle(msgPayload, 16);
-                    labelVLineaire.Content = robot.vitesseLineaireOdo;
+                    labelVLineaire.Content = "Vitesse linéaire : " + robot.vitesseLineaireOdo;
 
                     robot.vitesseAngulaireOdo = BitConverter.ToSingle(msgPayload, 20);
-                    labelVAngulaire.Content = robot.vitesseAngulaireOdo;
+                    labelVAngulaire.Content = "Vitesse angulaire : " + robot.vitesseAngulaireOdo;
 
                     //  int posData = 
                     //  TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
