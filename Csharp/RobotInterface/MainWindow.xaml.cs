@@ -21,7 +21,7 @@ using System.Windows.Forms;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 using Utilities;
 using WpfOscilloscopeControl;
-using WpfWorldMapDisplay; 
+using SciChart.Charting.Visuals;
 
 namespace RobotInterface
 {
@@ -37,6 +37,9 @@ namespace RobotInterface
 
         public MainWindow()
         {
+            // Set this code once in App.xaml.cs or application startup
+            SciChartSurface.SetRuntimeLicenseKey("N+o9D5ioOQMfRcGy8lw1EEsQyXFNhYFG4bBgHA3VEGk4jnECe6LRBeJDmQ/kBmaJJ9EMz274QwbUHPmyhDhRpfegooz/zR+h9qi2tuB5MTqvHi05s1YAuzG3lCuh+B15LMXFiaIs242lEb1eb4U5PQ2KDDXsW7RTayeHDui5hubp7CM6rfIs8niMUQQ2yOBalOd/kQ0s2CCA+V3vIdVfLZGyNHyLU6Fa2xsq42J5Nx3UF3BM1NSA4SX8NLsaDYKIxHaZydTNQO7yMj/rSKk8NsnMglb/gPZpJ+fhkXXzhQJcyPfcj+qQioTSiX6QFk4yoFQ7lEKaMFtbM7r28PBiN3e9ngxEoFechwgKQpxVkhmnAwHi9aHkqyIqHRxTqD0pv/5Jelt+J+oT9malWdtAPpU0kBjBG2JUt7qoXDseglK4dl5IC/xnE9tje90Mj9MhCYFAnT4dSg/VgF0/r5a6Wc3HGqYFoDE0XjF6L8oEO12a0cEGKfRH5RxE9R4r8F7s4A=="); 
+
             InitializeComponent();
             serialPort1 = new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
@@ -53,7 +56,7 @@ namespace RobotInterface
             m_KeyboardHookManager.KeyDown += M_KeyboardHookManager_KeyDown;
 
             oscilloSpeed.AddOrUpdateLine(1, 200, "Ligne1");
-           // oscilloSpeed.ChangeLineColor(1, Color.RoyalBlue);
+            oscilloSpeed.ChangeLineColor(1, Color.FromRgb(0,255,0));
 
         }
 
@@ -100,6 +103,8 @@ namespace RobotInterface
             //    robot.receivedText="";
             //}
             oscilloSpeed.AddPointToLine(1, robot.timestampOdo, robot.positionXOdo);
+            
+
             while (robot.byteListReceived.Count != 0)
             {
                 var c = robot.byteListReceived.Dequeue();
