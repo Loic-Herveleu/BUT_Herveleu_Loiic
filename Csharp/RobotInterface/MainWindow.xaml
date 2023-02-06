@@ -32,12 +32,22 @@
         </GroupBox>
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name="buttonEnvoyer" Content="Envoyer"  Width="100" Click="buttonEnvoyer_Click" Background="#FFF9F9F0" BorderBrush="Black" BorderThickness="3" Height="35" Margin="70,0,50,0">
+            <Button x:Name="buttonEnvoyer" Content="Envoyer"  Width="100" Click="buttonEnvoyer_Click" Background="#FFF9F9F0" BorderBrush="Black" BorderThickness="3" Height="35" Margin="5,0,0,0">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="buttonTest" Content="Test" Width="100" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="50,0,70,0">
+            <Button x:Name="buttonTest" Content="Test" Width="100" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,0,0">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button x:Name="buttonPIDX" Content="PID X" Width="100" Click="buttonPIDX_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,0,0">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button x:Name="buttonPIDT" Content="PID Theta" Width="100" Click="buttonPIDT_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,0,0">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -54,7 +64,7 @@
         </StackPanel>
 
         <StackPanel VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <GroupBox x:Name="groupBox1" Header="Leds:" Width="70" Height="100" BorderBrush="#FF009FFF" BorderThickness="3" Margin="80,0,80,0">
+            <GroupBox x:Name="groupBox1" Header="Leds :" Width="70" Height="100" BorderBrush="#FF009FFF" BorderThickness="3" Margin="0,0,0,0">
                 <StackPanel Orientation="Vertical">
                     <CheckBox x:Name="checkBoxLed1" Content="Led1"  Margin="0,0,0,10" Cursor="AppStarting" Background="#FFA0ADFF" Height="15" Width="45"/>
                     <CheckBox x:Name="checkBoxLed2" Content="Led2"  Margin="0,0,0,10"  Height="15" Width="45" />
@@ -67,6 +77,22 @@
                     <Label x:Name="labelIRC" Content="" Height="25"/>
                     <Label x:Name="labelIRD" Content="" Height="25"/>
                     <Label x:Name="labelIRG" Content="" Height="25"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="groupBo" Header="Correcteurs :" Height="100" Width="90" BorderBrush="#FF5EC516" BorderThickness="3">
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="textkp" Text="KP : " Height="25" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="textki" Text="KI : " Height="25" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="textkd" Text="KD : " Height="25" BorderBrush="{x:Null}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="groupB" Header="Erreur :" Height="100" Width="90" BorderBrush="#FFF520EC" BorderThickness="3">
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="textprop" Text="P : " Height="25" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="textinteg" Text="I : " Height="25" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="textderiv" Text="D : " Height="25" BorderBrush="{x:Null}"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

@@ -41,7 +41,7 @@ namespace RobotInterface
             SciChartSurface.SetRuntimeLicenseKey("N+o9D5ioOQMfRcGy8lw1EEsQyXFNhYFG4bBgHA3VEGk4jnECe6LRBeJDmQ/kBmaJJ9EMz274QwbUHPmyhDhRpfegooz/zR+h9qi2tuB5MTqvHi05s1YAuzG3lCuh+B15LMXFiaIs242lEb1eb4U5PQ2KDDXsW7RTayeHDui5hubp7CM6rfIs8niMUQQ2yOBalOd/kQ0s2CCA+V3vIdVfLZGyNHyLU6Fa2xsq42J5Nx3UF3BM1NSA4SX8NLsaDYKIxHaZydTNQO7yMj/rSKk8NsnMglb/gPZpJ+fhkXXzhQJcyPfcj+qQioTSiX6QFk4yoFQ7lEKaMFtbM7r28PBiN3e9ngxEoFechwgKQpxVkhmnAwHi9aHkqyIqHRxTqD0pv/5Jelt+J+oT9malWdtAPpU0kBjBG2JUt7qoXDseglK4dl5IC/xnE9tje90Mj9MhCYFAnT4dSg/VgF0/r5a6Wc3HGqYFoDE0XjF6L8oEO12a0cEGKfRH5RxE9R4r8F7s4A=="); 
 
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM15", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
@@ -103,8 +103,7 @@ namespace RobotInterface
             //    robot.receivedText="";
             //}
             oscilloSpeed.AddPointToLine(1, robot.timestampOdo, robot.positionXOdo);
-            
-
+            asservSpeedDisplay.UpdatePolarOdometrySpeed(robot.vitesseLineaireOdo, robot.vitesseAngulaireOdo);
             while (robot.byteListReceived.Count != 0)
             {
                 var c = robot.byteListReceived.Dequeue();
@@ -302,7 +301,9 @@ namespace RobotInterface
             Vitesse = 0x0040,
             RobotState = 0x0050,
             ManuControl = 0x0052,
-            PositionData = 0x0061
+            PositionData = 0x0061,
+            VitesseData = 0x0062,
+            Correcteur = 0x0063
         }
         public enum StateRobot
         {
@@ -417,6 +418,13 @@ namespace RobotInterface
                     //  int posData = 
                     //  TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
                     break;
+
+                case Function.VitesseData:
+
+                    robot.vitesseM1= BitConverter.ToSingle(msgPayload, 0);
+                    robot.vitesseM2 = BitConverter.ToSingle(msgPayload, 4);
+                    asservSpeedDisplay.UpdateIndependantOdometrySpeed(robot.vitesseM1, robot.vitesseM2);
+                    break;
             }
         }
 
@@ -431,6 +439,22 @@ namespace RobotInterface
         {
             robot.autoControlActivated = true;
             UartEncodeAndSendMessage((int)Function.ManuControl, 1, new byte[] { 0 });
+        }
+
+        private void buttonPIDX_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] payloadPID = new byte[29];
+
+            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
+            TextBoxEmission.Text = "";
+        }
+
+        private void buttonPIDT_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] payloadPID = new byte[29];
+
+            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
+            TextBoxEmission.Text = "";
         }
     }
 }

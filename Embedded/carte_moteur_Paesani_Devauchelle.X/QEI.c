@@ -23,6 +23,7 @@ void InitQEI2() {
 #define DISTROUES 281.2
 #define  FREQ_ECH_QEI 250
 #define POSITION_DATA 0x0061
+#define VITESSE_DATA 0x0062
 
 //Variable QEIU----------------------------------------------------
 double QeiDroitPosition_T_1;
@@ -97,4 +98,10 @@ void SendPositionData()
     getBytesFromFloat(positionPayload, 16, (float)(robotState.vitesseLineaireFromOdometry));
     getBytesFromFloat(positionPayload, 20, (float)(robotState.vitesseAngulaireFromOdometry));
     UartEncodeAndSendMessage(POSITION_DATA, 24, positionPayload);
+    
+    unsigned char vitessePayload[8];
+    getBytesFromFloat(vitessePayload, 0, (float)(robotState.vitesseDroitFromOdometry));
+    getBytesFromFloat(vitessePayload, 4, (float)(robotState.vitesseGaucheFromOdometry));
+    UartEncodeAndSendMessage(VITESSE_DATA, 8 , vitessePayload);
+
 }
