@@ -20,6 +20,7 @@ typedef struct _PidCorrector
 }PidCorrector;
 
 void SetupPidAsservissement(volatile PidCorrector* PidCorr, double Kp, double Ki, double Kd, double pro);
+double Correcteur(volatile PidCorrector* PidCorr, double erreur);
 
 #endif	/* ASSERVISSEMENT_H */
 
