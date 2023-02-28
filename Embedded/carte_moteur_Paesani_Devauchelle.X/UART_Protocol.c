@@ -119,7 +119,24 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char* p
         case SET_ROBOT_MANUAL_CONTROL: 
             SetRobotAutoControlState(payload[0]);
             break;
+            
+        case ASSERVISSEMENT:
+            unsigned char tabkp[4];
+            tabkp[0]=payload[1];
+            tabkp[1]=payload[2];
+            tabkp[2]=payload[3];
+            tabkp[3]=payload[4];
+            getFloat(tabkp,0)
+            
+            if(payload[0]==0)
+            {
 
+            }
+            else
+            {
+                
+            }
+            break;
         default:
             break;
     }

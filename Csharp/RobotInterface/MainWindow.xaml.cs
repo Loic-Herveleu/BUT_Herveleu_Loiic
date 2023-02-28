@@ -443,18 +443,84 @@ namespace RobotInterface
 
         private void buttonPIDX_Click(object sender, RoutedEventArgs e)
         {
-            byte[] payloadPID = new byte[29];
+            byte[] payloadPID = new byte[25];
+            payloadPID[0] = 0;
 
-            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
-            TextBoxEmission.Text = "";
+
+            float kp = float.Parse(textkp.Text);
+            var tabkp = BitConverter.GetBytes((float)kp);
+            Array.Copy(tabkp, 0, payloadPID, 1, 4);
+
+            float ki = float.Parse(textki.Text);
+            var tabki = BitConverter.GetBytes((float)ki);
+            Array.Copy(tabki, 0, payloadPID, 5, 4);
+
+            float kd = float.Parse(textkd.Text);
+            var tabkd = BitConverter.GetBytes((float)kd);
+            Array.Copy(tabkd, 0, payloadPID, 9, 4);
+
+            float propmax = float.Parse(textprop.Text);
+            var tabprop = BitConverter.GetBytes((float)propmax);
+            Array.Copy(tabprop, 0, payloadPID, 13, 4);
+
+            float integmax = float.Parse(textinteg.Text);
+            var tabinteg = BitConverter.GetBytes((float)integmax);
+            Array.Copy(tabinteg, 0, payloadPID, 17, 4);
+
+            float derivemax = float.Parse(textderiv.Text);
+            var tabderive = BitConverter.GetBytes((float)derivemax);
+            Array.Copy(tabderive, 0, payloadPID, 21, 4);
+
+            UartEncodeAndSendMessage(0x0063, 25, payloadPID);
+
+            textkp.Text = "";
+            textki.Text = "";
+            textkd.Text = "";
+
+            textprop.Text = "";
+            textinteg.Text = "";
+            textderiv.Text = "";
         }
 
         private void buttonPIDT_Click(object sender, RoutedEventArgs e)
         {
-            byte[] payloadPID = new byte[29];
 
-            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
-            TextBoxEmission.Text = "";
+            byte[] payloadPID = new byte[25];
+            payloadPID[0] = 1;
+
+            float kp = float.Parse(textkp.Text);
+            var tabkp = BitConverter.GetBytes((float)kp);
+            Array.Copy(tabkp, 0, payloadPID, 1, 4);
+
+            float ki = float.Parse(textki.Text);
+            var tabki = BitConverter.GetBytes((float)ki);
+            Array.Copy(tabki, 0, payloadPID, 5, 4);
+
+            float kd = float.Parse(textkd.Text);
+            var tabkd = BitConverter.GetBytes((float)kd);
+            Array.Copy(tabkd, 0, payloadPID, 9, 4);
+
+            float propmax = float.Parse(textprop.Text);
+            var tabprop = BitConverter.GetBytes((float)propmax);
+            Array.Copy(tabprop, 0, payloadPID, 13, 4);
+
+            float integmax = float.Parse(textinteg.Text);
+            var tabinteg = BitConverter.GetBytes((float)integmax);
+            Array.Copy(tabinteg, 0, payloadPID, 17, 4);
+
+            float derivemax = float.Parse(textderiv.Text);
+            var tabderive = BitConverter.GetBytes((float)derivemax);
+            Array.Copy(tabderive, 0, payloadPID, 21, 4);
+
+            UartEncodeAndSendMessage(0x0063, 25, payloadPID);
+
+            textkp.Text = "";
+            textki.Text = "";
+            textkd.Text = "";
+
+            textprop.Text = "";
+            textinteg.Text = "";
+            textderiv.Text = "";
         }
     }
 }
