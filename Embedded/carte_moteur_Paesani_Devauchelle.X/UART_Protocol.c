@@ -121,20 +121,56 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char* p
             break;
             
         case ASSERVISSEMENT:
-            unsigned char tabkp[4];
+            
+            unsigned char tabkp[4],tabki[4],tabkd[4],tabpropmax[4],tabintegmax[4],tabderivemax[4];
+            
             tabkp[0]=payload[1];
             tabkp[1]=payload[2];
             tabkp[2]=payload[3];
             tabkp[3]=payload[4];
-            getFloat(tabkp,0)
+            
+            tabki[0]=payload[5];
+            tabki[1]=payload[6];
+            tabki[2]=payload[7];
+            tabki[3]=payload[8];
+              
+            tabkd[0]=payload[9];
+            tabkd[1]=payload[10];
+            tabkd[2]=payload[11];
+            tabkd[3]=payload[12];
+            
+            tabpropmax[0]=payload[9];
+            tabpropmax[1]=payload[10];
+            tabpropmax[2]=payload[11];
+            tabpropmax[3]=payload[12];
+            
+            tabintegmax[0]=payload[9];
+            tabintegmax[1]=payload[10];
+            tabintegmax[2]=payload[11];
+            tabintegmax[3]=payload[12];
+            
+            tabderivemax[0]=payload[9];
+            tabderivemax[1]=payload[10];
+            tabderivemax[2]=payload[11];
+            tabderivemax[3]=payload[12];
+            
+            
+            kp=getFloat(tabkp,0);
+            ki=getFloat(tabki,0);
+            kd=getFloat(tabkd,0);
+            propmax=getFloat(tabpropmax,0);
+            integmax=getFloat(tabintegmax,0);
+            derivemax=getFloat(tabderivemax,0);
             
             if(payload[0]==0)
             {
-
+            SetupPidAsservissement(PidX, Kp, Ki, Kd, propmax, integmax, derivemax );
+            sendPidAsservissement(PidX);
             }
             else
             {
-                
+            SetupPidAsservissement(PidT, Kp, Ki, Kd, propmax, integmax, derivemax );
+            sendPidAsservissement(PidT);
             }
             break;
         default:

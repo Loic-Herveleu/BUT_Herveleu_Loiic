@@ -27,6 +27,14 @@ void SetRobotAutoControlState(unsigned char payload);
 
 
 extern unsigned char autoControlActivated;
+extern double kp;
+extern double ki;
+extern double kd;
+extern double propmax;
+extern double integmax;
+extern double derivemax;
+            
+
 
 #endif	/* UART_PROTOCOL_H */
 
