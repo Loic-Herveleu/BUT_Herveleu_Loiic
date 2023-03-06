@@ -223,8 +223,12 @@
         <property key="save-temps" value="false"/>
       </C30Global>
       <ICD3PlatformTool>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.download.all" value="false"/>
       </ICD3PlatformTool>
+      <Tool>
+        <property key="firmware.download.all" value="false"/>
+      </Tool>
     </conf>
   </confs>
 </configurationDescriptor>

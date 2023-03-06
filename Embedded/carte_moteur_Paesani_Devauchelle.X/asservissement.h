@@ -12,6 +12,7 @@ typedef struct _PidCorrector
     double erreurIntegrale;
     double epsilon_1;
     double erreur;
+    double Consigne;
 
     //For Debug only
     double corrP;
@@ -19,8 +20,9 @@ typedef struct _PidCorrector
     double corrD;
 }PidCorrector;
 
-void SetupPidAsservissement(volatile PidCorrector* PidCorr, double Kp, double Ki, double Kd, double pro);
+void SetupPidAsservissement(volatile PidCorrector* PidCorr, double Kp, double Ki, double Kd, double prop, double integ, double derive, double consigne);
 double Correcteur(volatile PidCorrector* PidCorr, double erreur);
+void SendPidAsservissement(volatile PidCorrector* PidCorr);
 
 #endif	/* ASSERVISSEMENT_H */
 

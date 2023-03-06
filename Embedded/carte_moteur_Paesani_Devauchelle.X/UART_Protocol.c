@@ -2,6 +2,9 @@
 #include "UART_Protocol.h"
 #include "CB_TX1.h"
 #include "main.h"
+#include "Utilities.h"
+#include "Robot.h"
+#include "asservissement.h"
 
 extern unsigned char stateRobot;
 unsigned char autoControlActivated;
@@ -121,8 +124,8 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char* p
             break;
             
         case ASSERVISSEMENT:
-            
-            unsigned char tabkp[4],tabki[4],tabkd[4],tabpropmax[4],tabintegmax[4],tabderivemax[4];
+        {
+            unsigned char tabkp[4],tabki[4],tabkd[4],tabpropmax[4],tabintegmax[4],tabderivemax[4], tabconsigne[4];
             
             tabkp[0]=payload[1];
             tabkp[1]=payload[2];
@@ -139,39 +142,45 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char* p
             tabkd[2]=payload[11];
             tabkd[3]=payload[12];
             
-            tabpropmax[0]=payload[9];
-            tabpropmax[1]=payload[10];
-            tabpropmax[2]=payload[11];
-            tabpropmax[3]=payload[12];
+            tabpropmax[0]=payload[13];
+            tabpropmax[1]=payload[14];
+            tabpropmax[2]=payload[15];
+            tabpropmax[3]=payload[16];
             
-            tabintegmax[0]=payload[9];
-            tabintegmax[1]=payload[10];
-            tabintegmax[2]=payload[11];
-            tabintegmax[3]=payload[12];
+            tabintegmax[0]=payload[17];
+            tabintegmax[1]=payload[18];
+            tabintegmax[2]=payload[19];
+            tabintegmax[3]=payload[20];
             
-            tabderivemax[0]=payload[9];
-            tabderivemax[1]=payload[10];
-            tabderivemax[2]=payload[11];
-            tabderivemax[3]=payload[12];
+            tabderivemax[0]=payload[21];
+            tabderivemax[1]=payload[22];
+            tabderivemax[2]=payload[23];
+            tabderivemax[3]=payload[24];
             
+            tabconsigne[0]=payload[25];
+            tabconsigne[1]=payload[26];
+            tabconsigne[2]=payload[27];
+            tabconsigne[3]=payload[28];
             
-            kp=getFloat(tabkp,0);
-            ki=getFloat(tabki,0);
-            kd=getFloat(tabkd,0);
-            propmax=getFloat(tabpropmax,0);
-            integmax=getFloat(tabintegmax,0);
-            derivemax=getFloat(tabderivemax,0);
+            float Kp=getFloat(tabkp,0);
+            float Ki=getFloat(tabki,0);
+            float Kd=getFloat(tabkd,0);
+            float propmax=getFloat(tabpropmax,0);
+            float integmax=getFloat(tabintegmax,0);
+            float derivemax=getFloat(tabderivemax,0);
+            float consigne=getFloat(tabconsigne,0);
             
             if(payload[0]==0)
             {
-            SetupPidAsservissement(PidX, Kp, Ki, Kd, propmax, integmax, derivemax );
-            sendPidAsservissement(PidX);
+            SetupPidAsservissement(&robotState.PidX,  Kp, Ki, Kd, propmax, integmax, derivemax, consigne);
+            SendPidAsservissement(&robotState.PidX);
             }
-            else
+            else if(payload[0]==1)
             {
-            SetupPidAsservissement(PidT, Kp, Ki, Kd, propmax, integmax, derivemax );
-            sendPidAsservissement(PidT);
+            SetupPidAsservissement(&robotState.PidTheta, Kp, Ki, Kd, propmax, integmax, derivemax, consigne);
+            SendPidAsservissement(&robotState.PidTheta);
             }
+        }
             break;
         default:
             break;

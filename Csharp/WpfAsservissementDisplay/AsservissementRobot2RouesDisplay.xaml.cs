@@ -139,13 +139,6 @@ namespace WpfAsservissementDisplay
                     LabelCommandX.Visibility = Visibility.Hidden;
                     LabelCommandTheta.Visibility = Visibility.Hidden;
 
-                    LabelConsigneM1.Visibility = Visibility.Hidden;
-                    LabelConsigneM2.Visibility = Visibility.Hidden;
-                    LabelErreurM1.Visibility = Visibility.Hidden;
-                    LabelErreurM2.Visibility = Visibility.Hidden;
-                    LabelCommandM1.Visibility = Visibility.Hidden;
-                    LabelCommandM2.Visibility = Visibility.Hidden;
-
                     LabelCorrPX.Visibility = Visibility.Hidden;
                     LabelCorrPTheta.Visibility = Visibility.Hidden;
                     LabelCorrIX.Visibility = Visibility.Hidden;
@@ -153,12 +146,6 @@ namespace WpfAsservissementDisplay
                     LabelCorrDX.Visibility = Visibility.Hidden;
                     LabelCorrDTheta.Visibility = Visibility.Hidden;
 
-                    LabelCorrPM1.Visibility = Visibility.Hidden;
-                    LabelCorrPM2.Visibility = Visibility.Hidden;
-                    LabelCorrIM1.Visibility = Visibility.Hidden;
-                    LabelCorrIM2.Visibility = Visibility.Hidden;
-                    LabelCorrDM1.Visibility = Visibility.Hidden;
-                    LabelCorrDM2.Visibility = Visibility.Hidden;
                     break;
                 case AsservissementMode.Polar2Wheels:
                     LabelConsigneX.Visibility = Visibility.Visible;
@@ -168,13 +155,6 @@ namespace WpfAsservissementDisplay
                     LabelCommandX.Visibility = Visibility.Visible;
                     LabelCommandTheta.Visibility = Visibility.Visible;
 
-                    LabelConsigneM1.Visibility = Visibility.Hidden;
-                    LabelConsigneM2.Visibility = Visibility.Hidden;
-                    LabelErreurM1.Visibility = Visibility.Hidden;
-                    LabelErreurM2.Visibility = Visibility.Hidden;
-                    LabelCommandM1.Visibility = Visibility.Hidden;
-                    LabelCommandM2.Visibility = Visibility.Hidden;
-
                     LabelCorrPX.Visibility = Visibility.Visible;
                     LabelCorrPTheta.Visibility = Visibility.Visible;
                     LabelCorrIX.Visibility = Visibility.Visible;
@@ -182,12 +162,6 @@ namespace WpfAsservissementDisplay
                     LabelCorrDX.Visibility = Visibility.Visible;
                     LabelCorrDTheta.Visibility = Visibility.Visible;
 
-                    LabelCorrPM1.Visibility = Visibility.Hidden;
-                    LabelCorrPM2.Visibility = Visibility.Hidden;
-                    LabelCorrIM1.Visibility = Visibility.Hidden;
-                    LabelCorrIM2.Visibility = Visibility.Hidden;
-                    LabelCorrDM1.Visibility = Visibility.Hidden;
-                    LabelCorrDM2.Visibility = Visibility.Hidden;
                     break;
                 case AsservissementMode.Independant2Wheels:
                     LabelConsigneX.Visibility = Visibility.Hidden;
@@ -197,13 +171,6 @@ namespace WpfAsservissementDisplay
                     LabelCommandX.Visibility = Visibility.Hidden;
                     LabelCommandTheta.Visibility = Visibility.Hidden;
 
-                    LabelConsigneM1.Visibility = Visibility.Visible;
-                    LabelConsigneM2.Visibility = Visibility.Visible;
-                    LabelErreurM1.Visibility = Visibility.Visible;
-                    LabelErreurM2.Visibility = Visibility.Visible;
-                    LabelCommandM1.Visibility = Visibility.Visible;
-                    LabelCommandM2.Visibility = Visibility.Visible;
-
                     LabelCorrPX.Visibility = Visibility.Hidden;
                     LabelCorrPTheta.Visibility = Visibility.Hidden;
                     LabelCorrIX.Visibility = Visibility.Hidden;
@@ -211,12 +178,6 @@ namespace WpfAsservissementDisplay
                     LabelCorrDX.Visibility = Visibility.Hidden;
                     LabelCorrDTheta.Visibility = Visibility.Hidden;
 
-                    LabelCorrPM1.Visibility = Visibility.Visible;
-                    LabelCorrPM2.Visibility = Visibility.Visible;
-                    LabelCorrIM1.Visibility = Visibility.Visible;
-                    LabelCorrIM2.Visibility = Visibility.Visible;
-                    LabelCorrDM1.Visibility = Visibility.Visible;
-                    LabelCorrDM2.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -241,54 +202,34 @@ namespace WpfAsservissementDisplay
         {
             LabelConsigneX.Content = consigneXList.Average().ToString("N2");
             LabelConsigneTheta.Content = consigneThetaList.Average().ToString("N2");
-            LabelConsigneM1.Content = consigneM1List.Average().ToString("N2");
-            LabelConsigneM2.Content = consigneM2List.Average().ToString("N2");
-
+            
             LabelMeasureX.Content = measuredXList.Average().ToString("N2");
             LabelMeasureTheta.Content = measuredThetaList.Average().ToString("N2");
-            LabelMeasureM1.Content = measuredM1List.Average().ToString("N2");
-            LabelMeasureM2.Content = measuredM2List.Average().ToString("N2");
-
+            
             LabelErreurX.Content = errorXList.Average().ToString("N2");
             LabelErreurTheta.Content = errorThetaList.Average().ToString("N2");
-            LabelErreurM1.Content = errorM1List.Average().ToString("N2");
-            LabelErreurM2.Content = errorM2List.Average().ToString("N2");
-
+            
             LabelCommandX.Content = commandXList.Average().ToString("N2");
             LabelCommandTheta.Content = commandThetaList.Average().ToString("N2");
-            LabelCommandM1.Content = commandM1List.Average().ToString("N2");
-            LabelCommandM2.Content = commandM2List.Average().ToString("N2");
-
+            
             LabelKpX.Content = KpX.ToString("N2");
             LabelKpTheta.Content = KpTheta.ToString("N2");
-            LabelKpM1.Content = KpM1.ToString("N2");
-            LabelKpM2.Content = KpM2.ToString("N2");
-
+      
             LabelKiX.Content = KiX.ToString("N2");
             LabelKiTheta.Content = KiTheta.ToString("N2");
-            LabelKiM1.Content = KiM1.ToString("N2");
-            LabelKiM2.Content = KiM2.ToString("N2");
 
             LabelKdX.Content = KdX.ToString("N2");
             LabelKdTheta.Content = KdTheta.ToString("N2");
-            LabelKdM1.Content = KdM1.ToString("N2");
-            LabelKdM2.Content = KdM2.ToString("N2");
-
+    
             LabelCorrMaxPX.Content = corrLimitPX.ToString("N2");
             LabelCorrMaxPTheta.Content = corrLimitPTheta.ToString("N2");
-            LabelCorrMaxPM1.Content = corrLimitPM1.ToString("N2");
-            LabelCorrMaxPM2.Content = corrLimitPM2.ToString("N2");
-
+         
             LabelCorrMaxIX.Content = corrLimitIX.ToString("N2");
             LabelCorrMaxITheta.Content = corrLimitITheta.ToString("N2");
-            LabelCorrMaxIM1.Content = corrLimitIM1.ToString("N2");
-            LabelCorrMaxIM2.Content = corrLimitIM2.ToString("N2");
-
+ 
             LabelCorrMaxDX.Content = corrLimitDX.ToString("N2");
             LabelCorrMaxDTheta.Content = corrLimitDTheta.ToString("N2");
-            LabelCorrMaxDM1.Content = corrLimitDM1.ToString("N2");
-            LabelCorrMaxDM2.Content = corrLimitDM2.ToString("N2");
-
+       
 
             if (corrPXList.Count > 0)
             {
@@ -302,17 +243,6 @@ namespace WpfAsservissementDisplay
                 LabelCorrDTheta.Content = corrDThetaList.Average().ToString("N2");
             }
 
-            if (corrPM1List.Count > 0)
-            {
-                LabelCorrPM1.Content = corrPM1List.Average().ToString("N2");
-                LabelCorrPM2.Content = corrPM2List.Average().ToString("N2");
-
-                LabelCorrIM1.Content = corrIM1List.Average().ToString("N2");
-                LabelCorrIM2.Content = corrIM2List.Average().ToString("N2");
-
-                LabelCorrDM1.Content = corrDM1List.Average().ToString("N2");
-                LabelCorrDM2.Content = corrDM2List.Average().ToString("N2");
-            }
         }
 
         public void UpdatePolarSpeedConsigneValues(double consigneX, double consigneTheta)

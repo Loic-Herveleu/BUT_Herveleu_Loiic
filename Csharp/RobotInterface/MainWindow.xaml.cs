@@ -22,6 +22,7 @@ using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 using Utilities;
 using WpfOscilloscopeControl;
 using SciChart.Charting.Visuals;
+using WpfAsservissementDisplay;
 
 namespace RobotInterface
 {
@@ -167,6 +168,8 @@ namespace RobotInterface
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
             //byte[] ledTest = { 0x00, 0x01, 0x02 };
             UartEncodeAndSendMessage(0x0080, 7, array);
+            asservSpeedDisplay.UpdatePolarSpeedCorrectionGains(1, 2, 3, 4, 5, 6);
+            asservSpeedDisplay.UpdatePolarSpeedCorrectionLimits(7, 8, 9, 10, 11, 12);
             // ProcessDecodedMessage(0x0080, 7, array);
             //  ProcessDecodedMessage(0x0030, 3, ledTest);
         }
@@ -425,6 +428,34 @@ namespace RobotInterface
                     robot.vitesseM2 = BitConverter.ToSingle(msgPayload, 4);
                     asservSpeedDisplay.UpdateIndependantOdometrySpeed(robot.vitesseM1, robot.vitesseM2);
                     break;
+
+                case Function.Correcteur:
+
+                    if (msgPayload[0] == 0)
+                    {
+                        robot.kpX = BitConverter.ToSingle(msgPayload, 1);
+                        robot.kiX = BitConverter.ToSingle(msgPayload, 5);
+                        robot.kdX = BitConverter.ToSingle(msgPayload, 9);
+                        robot.erPropX = BitConverter.ToSingle(msgPayload, 13);
+                        robot.erIntegX = BitConverter.ToSingle(msgPayload, 17);
+                        robot.erDerivX = BitConverter.ToSingle(msgPayload, 21);
+                        robot.consigneX = BitConverter.ToSingle(msgPayload, 25);
+                    }
+                    else
+                    {
+                        robot.kpT = BitConverter.ToSingle(msgPayload, 1);
+                        robot.kiT = BitConverter.ToSingle(msgPayload, 5);
+                        robot.kdT = BitConverter.ToSingle(msgPayload, 9);
+                        robot.erPropT = BitConverter.ToSingle(msgPayload, 13);
+                        robot.erIntegT = BitConverter.ToSingle(msgPayload, 17);
+                        robot.erDerivT = BitConverter.ToSingle(msgPayload, 21);
+                        robot.consigneT = BitConverter.ToSingle(msgPayload, 25);
+
+                    }
+                    asservSpeedDisplay.UpdatePolarSpeedConsigneValues(robot.consigneX, robot.consigneT);
+                    asservSpeedDisplay.UpdatePolarSpeedCorrectionGains(robot.kpX, robot.kpT, robot.kiX, robot.kiT, robot.kdX, robot.kdT);
+                    asservSpeedDisplay.UpdatePolarSpeedCorrectionLimits(robot.erPropX, robot.erPropT, robot.erIntegX, robot.erIntegT, robot.erDerivX, robot.erDerivT);
+                    break;
             }
         }
 
@@ -443,7 +474,7 @@ namespace RobotInterface
 
         private void buttonPIDX_Click(object sender, RoutedEventArgs e)
         {
-            byte[] payloadPID = new byte[25];
+            byte[] payloadPID = new byte[29];
             payloadPID[0] = 0;
 
 
@@ -471,21 +502,25 @@ namespace RobotInterface
             var tabderive = BitConverter.GetBytes((float)derivemax);
             Array.Copy(tabderive, 0, payloadPID, 21, 4);
 
-            UartEncodeAndSendMessage(0x0063, 25, payloadPID);
+            //  float consigne = float.Parse();
+            var tabconsigne = BitConverter.GetBytes((float)0.3);
+            Array.Copy(tabconsigne, 0, payloadPID, 25, 4);
 
-            textkp.Text = "";
-            textki.Text = "";
-            textkd.Text = "";
+            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
 
-            textprop.Text = "";
-            textinteg.Text = "";
-            textderiv.Text = "";
+            //textkp.Text = "";
+            //textki.Text = "";
+            //textkd.Text = "";
+
+            //textprop.Text = "";
+            //textinteg.Text = "";
+            //textderiv.Text = "";
         }
 
         private void buttonPIDT_Click(object sender, RoutedEventArgs e)
         {
 
-            byte[] payloadPID = new byte[25];
+            byte[] payloadPID = new byte[29];
             payloadPID[0] = 1;
 
             float kp = float.Parse(textkp.Text);
@@ -512,15 +547,19 @@ namespace RobotInterface
             var tabderive = BitConverter.GetBytes((float)derivemax);
             Array.Copy(tabderive, 0, payloadPID, 21, 4);
 
-            UartEncodeAndSendMessage(0x0063, 25, payloadPID);
+            //  float consigne = float.Parse();
+            var tabconsigne = BitConverter.GetBytes((float)0.3);
+            Array.Copy(tabconsigne, 0, payloadPID, 25, 4);
 
-            textkp.Text = "";
-            textki.Text = "";
-            textkd.Text = "";
+            UartEncodeAndSendMessage(0x0063, 29, payloadPID);
 
-            textprop.Text = "";
-            textinteg.Text = "";
-            textderiv.Text = "";
+            //textkp.Text = "";
+            //textki.Text = "";
+            //textkd.Text = "";
+
+            //textprop.Text = "";
+            //textinteg.Text = "";
+            //textderiv.Text = "";
         }
     }
 }
