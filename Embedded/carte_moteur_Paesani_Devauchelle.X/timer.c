@@ -7,8 +7,8 @@
 #include "QEI.h"
 
 uint16_t tour = 0;
-unsigned long timestamp=0;
-int compteur =0;
+unsigned long timestamp = 0;
+int compteur = 0;
 //Initialisation d?un timer 32 bits
 
 void InitTimer23(void) {
@@ -80,10 +80,12 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
     QEIUpdateData();
+    UpdateAsservissement();
     compteur++;
-    if(compteur%25==0)
-    SendPositionData();
-
+    if (compteur % 25 == 0) {
+        SendPositionData();
+        SendPidVariablesAsservissement();
+    }
 }
 
 void InitTimer4(void) { //Fréquence de 150Hz
@@ -110,7 +112,6 @@ void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     OperatingSystemLoop();
 
 }
-
 
 void SetFreqTimer4(float freq) {
     T4CONbits.TCKPS = 0b00; //00 = 1:1 prescaler value

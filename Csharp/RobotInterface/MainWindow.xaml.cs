@@ -306,7 +306,8 @@ namespace RobotInterface
             ManuControl = 0x0052,
             PositionData = 0x0061,
             VitesseData = 0x0062,
-            Correcteur = 0x0063
+            Correcteur = 0x0063,
+            VariablesAsserv= 0x0064
         }
         public enum StateRobot
         {
@@ -418,15 +419,17 @@ namespace RobotInterface
                     robot.vitesseAngulaireOdo = BitConverter.ToSingle(msgPayload, 20);
                     labelVAngulaire.Content = "Vitesse angulaire : " + robot.vitesseAngulaireOdo;
 
+                    asservSpeedDisplay.UpdatePolarOdometrySpeed(robot.vitesseLineaireOdo, robot.vitesseAngulaireOdo);
+
                     //  int posData = 
                     //  TextBoxReception.Text += "Data : "+ (msgPayload).ToString();
                     break;
 
                 case Function.VitesseData:
 
-                    robot.vitesseM1= BitConverter.ToSingle(msgPayload, 0);
-                    robot.vitesseM2 = BitConverter.ToSingle(msgPayload, 4);
-                    asservSpeedDisplay.UpdateIndependantOdometrySpeed(robot.vitesseM1, robot.vitesseM2);
+                  //   robot.vitesseM1= BitConverter.ToSingle(msgPayload, 0);
+                  //  robot.vitesseM2 = BitConverter.ToSingle(msgPayload, 4);
+                  //  asservSpeedDisplay.UpdateIndependantOdometrySpeed(robot.vitesseM1, robot.vitesseM2);
                     break;
 
                 case Function.Correcteur:
@@ -455,6 +458,26 @@ namespace RobotInterface
                     asservSpeedDisplay.UpdatePolarSpeedConsigneValues(robot.consigneX, robot.consigneT);
                     asservSpeedDisplay.UpdatePolarSpeedCorrectionGains(robot.kpX, robot.kpT, robot.kiX, robot.kiT, robot.kdX, robot.kdT);
                     asservSpeedDisplay.UpdatePolarSpeedCorrectionLimits(robot.erPropX, robot.erPropT, robot.erIntegX, robot.erIntegT, robot.erDerivX, robot.erDerivT);
+                    break;
+
+                case Function.VariablesAsserv:
+
+                    robot.erreurX = BitConverter.ToSingle(msgPayload, 0);
+                    robot.erreurT = BitConverter.ToSingle(msgPayload, 4);
+                    robot.corrPX = BitConverter.ToSingle(msgPayload, 8);
+                    robot.corrPT = BitConverter.ToSingle(msgPayload, 12);
+                    robot.corrIX = BitConverter.ToSingle(msgPayload, 16);
+                    robot.corrIT = BitConverter.ToSingle(msgPayload, 20);
+                    robot.corrDX = BitConverter.ToSingle(msgPayload, 24);
+                    robot.corrDT = BitConverter.ToSingle(msgPayload, 28);
+
+                    asservSpeedDisplay.UpdatePolarSpeedErrorValues(robot.erreurX, robot.erreurT);
+                    asservSpeedDisplay.UpdatePolarSpeedCorrectionValues(robot.corrPX, robot.corrPT, robot.corrIX, robot.corrIT, robot.corrDX, robot.corrDT);
+
+
+
+
+
                     break;
             }
         }
@@ -498,12 +521,16 @@ namespace RobotInterface
             var tabinteg = BitConverter.GetBytes((float)integmax);
             Array.Copy(tabinteg, 0, payloadPID, 17, 4);
 
-            float derivemax = float.Parse(textderiv.Text);
+            // float derivemax = float.Parse(textderiv.Text);
+            float derivemax = 0;
+
             var tabderive = BitConverter.GetBytes((float)derivemax);
             Array.Copy(tabderive, 0, payloadPID, 21, 4);
 
-            //  float consigne = float.Parse();
-            var tabconsigne = BitConverter.GetBytes((float)0.3);
+            //  float consigne = float.Parse(textconsigne.Text);
+            float consigne = 0;
+
+            var tabconsigne = BitConverter.GetBytes((float)consigne);
             Array.Copy(tabconsigne, 0, payloadPID, 25, 4);
 
             UartEncodeAndSendMessage(0x0063, 29, payloadPID);
@@ -547,8 +574,8 @@ namespace RobotInterface
             var tabderive = BitConverter.GetBytes((float)derivemax);
             Array.Copy(tabderive, 0, payloadPID, 21, 4);
 
-            //  float consigne = float.Parse();
-            var tabconsigne = BitConverter.GetBytes((float)0.3);
+            float consigne = float.Parse(textconsigne.Text);
+            var tabconsigne = BitConverter.GetBytes((float)consigne);
             Array.Copy(tabconsigne, 0, payloadPID, 25, 4);
 
             UartEncodeAndSendMessage(0x0063, 29, payloadPID);
@@ -561,6 +588,7 @@ namespace RobotInterface
             //textinteg.Text = "";
             //textderiv.Text = "";
         }
+
     }
 }
 

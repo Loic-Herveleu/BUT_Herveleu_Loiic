@@ -24,7 +24,7 @@ void UartDecodeMessage(unsigned char c);
 void UartProcessDecodedMessage(int function,int payloadLength, unsigned char* payload);
 void SetRobotState(unsigned char payload);
 void SetRobotAutoControlState(unsigned char payload);
-
+void SendPidVariablesAsservissement();
 
 extern unsigned char autoControlActivated;
             

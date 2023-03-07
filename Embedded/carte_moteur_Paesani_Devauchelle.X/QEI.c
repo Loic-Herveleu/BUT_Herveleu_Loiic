@@ -20,7 +20,7 @@ void InitQEI2() {
     QEI2CONbits .QEIEN = 1; // Enable QEI Module
 }
 
-#define DISTROUES 281.2
+#define DISTROUES 0.2812
 #define  FREQ_ECH_QEI 250
 #define POSITION_DATA 0x0061
 #define VITESSE_DATA 0x0062
@@ -51,8 +51,8 @@ void QEIUpdateData() {
     QEI2RawValue += ((long) POS2HLD << 16);
 
     //Conversion en mm (r\?egl\?e pour la taille des roues codeuses)
-    QeiDroitPosition = 0.01620*QEI1RawValue;
-    QeiGauchePosition = -0.01620*QEI2RawValue;
+    QeiDroitPosition = 0.01620*QEI1RawValue/1000;
+    QeiGauchePosition = -0.01620*QEI2RawValue/1000;
 
     //Calcul des deltas de position
     delta_d = QeiDroitPosition - QeiDroitPosition_T_1;

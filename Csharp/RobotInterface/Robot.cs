@@ -33,6 +33,15 @@ namespace RobotInterface
         public float erDerivT;
         public float consigneX;
         public float consigneT;
+        public float erreurX;
+        public float erreurT;
+        public float corrPX;
+        public float corrIX;
+        public float corrDX;
+        public float corrPT;
+        public float corrIT;
+        public float corrDT;
+
 
         public int timestampOdo;
         public bool autoControlActivated=true;

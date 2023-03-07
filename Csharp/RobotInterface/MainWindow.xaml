@@ -38,12 +38,16 @@
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="buttonTest" Content="Test" Width="100" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,0,0">
+            <Button x:Name="buttonTest" Content="Test" Width="100" Click="buttonTest_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,20,0">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="buttonPIDX" Content="PID X" Width="100" Click="buttonPIDX_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="10,0,0,0">
+            <CheckBox x:Name="checkBoxMode" Content="Mode Auto" Margin="50,0,0,0" Checked="checkBoxMode_Checked" Unchecked="checkBoxMode_Unchecked" Height="15" Width="100"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="buttonPIDX" Content="PID X" Width="100" Click="buttonPIDX_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="20,0,0,0">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -53,15 +57,11 @@
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name="buttonClear" Content="Clear" Width="100" Click="buttonClear_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="70,0,50,0">
+            <Button x:Name="buttonClear" Content="Clear" Width="100" Click="buttonClear_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="45,0,50,0">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <CheckBox x:Name="checkBoxMode" Content="Mode Auto" Margin="50,0,0,0" Checked="checkBoxMode_Checked" Unchecked="checkBoxMode_Unchecked" Height="15" Width="100"/>
         </StackPanel>
 
         <StackPanel VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
@@ -105,10 +105,11 @@
         </StackPanel>
 
         <oscillo:WpfOscilloscope x:Name="oscilloSpeed" Grid.Row="4" Grid.Column="1"/>
+        <!--<oscillo:WpfOscilloscope x:Name="oscilloSpeed" Grid.Row="4" Grid.Column="3"/>-->
 
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="3">
             <StackPanel Orientation="Vertical">
-                <GroupBox x:Name="groupBo" Header="Correcteurs :" Height="100" Width="90" BorderBrush="#FF5EC516" BorderThickness="3" Margin="80,10,0,10">
+                <GroupBox x:Name="groupBo" Header="Correcteurs :" Height="125" Width="90" BorderBrush="#FF5EC516" BorderThickness="3" Margin="80,5,0,0">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="KP :" Height="25" Width="30" BorderBrush="{x:Null}"/>
@@ -122,11 +123,14 @@
                             <Label Content="KD :" Height="25" Width="30" BorderBrush="{x:Null}"/>
                             <TextBox x:Name="textkd" Height="25" Width="50" BorderBrush="{x:Null}"/>
                         </StackPanel>
-
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="CS :" Height="25" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textconsigne" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox x:Name="groupB" Header="Erreur :" Height="100" Width="90" BorderBrush="#FFF520EC" BorderThickness="3" Margin="80,0,0,0">
+                <GroupBox x:Name="groupB" Header="Erreur Max:" Height="100" Width="90" BorderBrush="#FFF520EC" BorderThickness="3" Margin="80,0,0,0">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="P :" Height="25" Width="30" BorderBrush="{x:Null}"/>
@@ -143,7 +147,7 @@
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
-            <GroupBox Background="#FFF9F9F0"  BorderBrush="Black" BorderThickness="3"  Margin="50,0,0,0">
+            <GroupBox Background="#FFF9F9F0"  BorderBrush="Black" BorderThickness="3"  Margin="40,0,0,0">
                 <AsservDisplay:AsservissementRobot2RouesDisplayControl x:Name="asservSpeedDisplay"/>
             </GroupBox>
         </StackPanel>
