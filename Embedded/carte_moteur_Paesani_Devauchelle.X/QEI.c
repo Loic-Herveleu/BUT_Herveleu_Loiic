@@ -21,7 +21,7 @@ void InitQEI2() {
 }
 
 #define DISTROUES 0.2812
-#define  FREQ_ECH_QEI 250
+#define  FREQ_ECH_QEI 250.0
 #define POSITION_DATA 0x0061
 #define VITESSE_DATA 0x0062
 

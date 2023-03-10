@@ -46,17 +46,26 @@ void SendPidAsservissement(volatile PidCorrector* PidCorr) {
 double Correcteur(volatile PidCorrector*PidCorr, double erreur) {
     PidCorr->erreur = erreur;
 
-    double erreurProportionnelle = erreur;
-    erreurProportionnelle = LimitToInterval(erreurProportionnelle, -PidCorr->erreurProportionelleMax / PidCorr->Kp, PidCorr->erreurProportionelleMax / PidCorr->Kp);
+    double erreurProportionnelle = LimitToInterval(PidCorr->erreur, -PidCorr->erreurProportionelleMax / PidCorr->Kp, PidCorr->erreurProportionelleMax / PidCorr->Kp);
     PidCorr->corrP = erreurProportionnelle * PidCorr->Kp;
 
-    PidCorr->erreurIntegrale = PidCorr->erreurIntegrale + erreur / (float) (FREQ_ECH_QEI);
+    PidCorr->erreurIntegrale = PidCorr->erreurIntegrale + PidCorr->erreur / FREQ_ECH_QEI;
     PidCorr->erreurIntegrale = LimitToInterval(PidCorr->erreurIntegrale, -PidCorr->erreurIntegraleMax / PidCorr->Ki, PidCorr->erreurIntegraleMax / PidCorr->Ki);
-    PidCorr->corrI = (PidCorr->erreurIntegrale) * PidCorr->Ki;
+    PidCorr->corrI = PidCorr->erreurIntegrale * PidCorr->Ki;
 
-    double erreurDerivee = (erreur - PidCorr->epsilon_1)*(float) (FREQ_ECH_QEI);
+    double erreurDerivee = (erreur - PidCorr->epsilon_1)*FREQ_ECH_QEI;
     double deriveeBornee = LimitToInterval(erreurDerivee, -PidCorr->erreurDeriveeMax / PidCorr->Kd, PidCorr->erreurDeriveeMax / PidCorr->Kd);
+   
+    
     PidCorr->corrD = deriveeBornee * PidCorr->Kd;
+    double seuil =2;
+    if(PidCorr->corrD>seuil)
+        PidCorr->corrD -= seuil;
+    else if(PidCorr->corrD += seuil)
+        PidCorr->corrD += seuil;
+    else
+        PidCorr->corrD = 0;
+    
     PidCorr->epsilon_1 = erreur;
     return PidCorr->corrP + PidCorr->corrI + PidCorr->corrD;
 }
@@ -83,5 +92,5 @@ void SendPidVariablesAsservissement() {
     getBytesFromFloat(variablesAsserv, 24, robotState.PidX.corrD);
     getBytesFromFloat(variablesAsserv, 28, robotState.PidTheta.corrD);
 
-    UartEncodeAndSendMessage(0x0064, 33, variablesAsserv);
+    UartEncodeAndSendMessage(0x0064, 32, variablesAsserv);
 }

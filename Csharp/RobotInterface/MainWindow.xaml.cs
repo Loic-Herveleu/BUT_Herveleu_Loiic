@@ -474,10 +474,6 @@ namespace RobotInterface
                     asservSpeedDisplay.UpdatePolarSpeedErrorValues(robot.erreurX, robot.erreurT);
                     asservSpeedDisplay.UpdatePolarSpeedCorrectionValues(robot.corrPX, robot.corrPT, robot.corrIX, robot.corrIT, robot.corrDX, robot.corrDT);
 
-
-
-
-
                     break;
             }
         }
@@ -521,14 +517,12 @@ namespace RobotInterface
             var tabinteg = BitConverter.GetBytes((float)integmax);
             Array.Copy(tabinteg, 0, payloadPID, 17, 4);
 
-            // float derivemax = float.Parse(textderiv.Text);
-            float derivemax = 0;
+            float derivemax = float.Parse(textderiv.Text);
 
             var tabderive = BitConverter.GetBytes((float)derivemax);
             Array.Copy(tabderive, 0, payloadPID, 21, 4);
 
-            //  float consigne = float.Parse(textconsigne.Text);
-            float consigne = 0;
+            float consigne = float.Parse(textconsigne.Text);
 
             var tabconsigne = BitConverter.GetBytes((float)consigne);
             Array.Copy(tabconsigne, 0, payloadPID, 25, 4);
