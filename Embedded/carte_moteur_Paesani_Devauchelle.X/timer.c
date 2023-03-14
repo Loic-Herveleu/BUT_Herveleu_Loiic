@@ -78,7 +78,7 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
     //LED_BLANCHE = !LED_BLANCHE;
     PWMUpdateSpeed();
-    ADC1StartConversionSequence();
+   // ADC1StartConversionSequence();
     QEIUpdateData();
     UpdateAsservissement();
     compteur++;
@@ -109,7 +109,7 @@ void InitTimer4(void) { //Fréquence de 150Hz
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     IFS1bits.T4IF = 0;
     timestamp = timestamp + 1;
-    OperatingSystemLoop();
+    // OperatingSystemLoop();
 
 }
 

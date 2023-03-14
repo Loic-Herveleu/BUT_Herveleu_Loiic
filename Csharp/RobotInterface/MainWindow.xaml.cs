@@ -284,7 +284,7 @@ namespace RobotInterface
 
                     if (CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload) == c)
                     {
-                        TextBoxReception.Text += "OK\n";
+                  //      TextBoxReception.Text += "OK\n";
                         ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     }
                     rcvState = StateReception.Waiting;
@@ -470,9 +470,13 @@ namespace RobotInterface
                     robot.corrIT = BitConverter.ToSingle(msgPayload, 20);
                     robot.corrDX = BitConverter.ToSingle(msgPayload, 24);
                     robot.corrDT = BitConverter.ToSingle(msgPayload, 28);
+                    robot.commandX = BitConverter.ToSingle(msgPayload, 32);
+                    robot.commandT = BitConverter.ToSingle(msgPayload, 36);
+
 
                     asservSpeedDisplay.UpdatePolarSpeedErrorValues(robot.erreurX, robot.erreurT);
                     asservSpeedDisplay.UpdatePolarSpeedCorrectionValues(robot.corrPX, robot.corrPT, robot.corrIX, robot.corrIT, robot.corrDX, robot.corrDT);
+                    asservSpeedDisplay.UpdatePolarSpeedCommandValues(robot.commandX, robot.commandT);
 
                     break;
             }

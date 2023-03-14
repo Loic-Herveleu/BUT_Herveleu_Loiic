@@ -41,6 +41,8 @@ namespace RobotInterface
         public float corrPT;
         public float corrIT;
         public float corrDT;
+        public float commandX;
+        public float commandT;
 
 
         public int timestampOdo;

@@ -32,7 +32,7 @@
             <TextBox x:Name="TextBoxEmission" Text="" TextWrapping="Wrap" BorderBrush="{x:Null}" Margin="0,0,0,0" AcceptsReturn="True"  Background="{x:Null}" KeyUp="TextBoxEmission_KeyUp"/>
         </GroupBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="buttonEnvoyer" Content="Envoyer"  Width="100" Click="buttonEnvoyer_Click" Background="#FFF9F9F0" BorderBrush="Black" BorderThickness="3" Height="35" Margin="5,0,0,0">
                 <Button.Effect>
                     <DropShadowEffect/>
@@ -46,7 +46,7 @@
             <CheckBox x:Name="checkBoxMode" Content="Mode Auto" Margin="50,0,0,0" Checked="checkBoxMode_Checked" Unchecked="checkBoxMode_Unchecked" Height="15" Width="100"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="buttonPIDX" Content="PID X" Width="100" Click="buttonPIDX_Click" BorderThickness="3" Background="#FFF9F9F0" BorderBrush="Black" Height="35" Margin="20,0,0,0">
                 <Button.Effect>
                     <DropShadowEffect/>
@@ -64,93 +64,102 @@
             </Button>
         </StackPanel>
 
-        <StackPanel VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <GroupBox x:Name="groupBox1" Header="Leds :" Width="70" Height="100" BorderBrush="#FF009FFF" BorderThickness="3" Margin="80,0,80,0">
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="1*"></ColumnDefinition>
+                <ColumnDefinition  Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <GroupBox x:Name="groupBox1" Header="Leds :" BorderBrush="#FF009FFF" BorderThickness="3">
                 <StackPanel Orientation="Vertical">
-                    <CheckBox x:Name="checkBoxLed1" Content="Led1"  Margin="0,0,0,10" Cursor="AppStarting" Background="#FFA0ADFF" Height="15" Width="45"/>
-                    <CheckBox x:Name="checkBoxLed2" Content="Led2"  Margin="0,0,0,10"  Height="15" Width="45" />
-                    <CheckBox x:Name="checkBoxLed3" Content="Led3"  Background="#FFFFA8A8" Height="15" Width="45" />
+                    <CheckBox x:Name="checkBoxLed1" Content="Led1"  HorizontalAlignment="Center" Margin="5" Cursor="AppStarting" Background="#FFA0ADFF"/>
+                    <CheckBox x:Name="checkBoxLed2" Content="Led2"  HorizontalAlignment="Center" Margin="5"/>
+                    <CheckBox x:Name="checkBoxLed3" Content="Led3"  HorizontalAlignment="Center" Margin="5"  Background="#FFFFA8A8"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox x:Name="groupBox" Header="Télémètres IR :" Height="100" Width="180" BorderBrush="#FFCFCFCF" BorderThickness="3">
+            <GroupBox x:Name="groupBox" Header="Télémètres IR :" BorderBrush="#FFCFCFCF" BorderThickness="3" Grid.Column="1">
                 <StackPanel Orientation="Vertical">
-                    <Label x:Name="labelIRC" Content="" Height="25"/>
-                    <Label x:Name="labelIRD" Content="" Height="25"/>
-                    <Label x:Name="labelIRG" Content="" Height="25"/>
+                    <Label x:Name="labelIRC" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelIRD" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelIRG" Content="" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </GroupBox>
 
-            
-        </StackPanel>
-        
-        <StackPanel VerticalAlignment="Bottom"  Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <GroupBox x:Name="groupBox2" Header="Vitesses :" Height="130" Width="180" BorderThickness="3" BorderBrush="#FFEA0000" Margin="30,0,50,0">
+            <GroupBox x:Name="groupBox2" Header="Vitesses :" BorderThickness="3" BorderBrush="#FFEA0000" Grid.Row="1">
                 <StackPanel>
-                    <Label x:Name="labelVG" Content="" Height="25"/>
-                    <Label x:Name="labelVD" Content="" Height="25"/>
-                    <Label x:Name="labelVLineaire" Content="" Height="25"/>
-                    <Label x:Name="labelVAngulaire" Content="" Height="25"/>
+                    <Label x:Name="labelVG" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelVD" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelVLineaire" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelVAngulaire" Content="" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </GroupBox>
-            
-            <GroupBox x:Name="groupBox3" Header="Positions :" Width="140" BorderBrush="#FF7400FF" BorderThickness="3">
-                <StackPanel>
-                    <Label x:Name="labelPosX" Content=""/>
-                    <Label x:Name="labelPosY" Content=""/>
-                    <Label x:Name="labelAngleRad" Content="" />
-                    <Label x:Name="labelTimestamp" Content=""/>
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
 
+            <GroupBox x:Name="groupBox3" Header="Positions :" BorderBrush="#FF7400FF" BorderThickness="3" Grid.Column="1" Grid.Row="1">
+                <StackPanel>
+                    <Label x:Name="labelPosX" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelPosY" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelAngleRad" Content="" VerticalContentAlignment="Center"/>
+                    <Label x:Name="labelTimestamp" Content="" VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+ 
         <oscillo:WpfOscilloscope x:Name="oscilloSpeed" Grid.Row="4" Grid.Column="1"/>
         <!--<oscillo:WpfOscilloscope x:Name="oscilloSpeed" Grid.Row="4" Grid.Column="3"/>-->
 
-        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="3">
+        <Grid Grid.Column="3" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="1*"></ColumnDefinition>
+                <ColumnDefinition  Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
             <StackPanel Orientation="Vertical">
-                <GroupBox x:Name="groupBo" Header="Correcteurs :" Height="125" Width="90" BorderBrush="#FF5EC516" BorderThickness="3" Margin="80,5,0,0">
+                <GroupBox x:Name="groupBo" Header="Correcteurs :" BorderBrush="#FF5EC516" BorderThickness="3">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="KP :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textkp" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="KP :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textkp" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="KI :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textki" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="KI :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textki" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="KD :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textkd" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="KD :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textkd" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="CS :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textconsigne" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="CS :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textconsigne" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox x:Name="groupB" Header="Erreur Max:" Height="100" Width="90" BorderBrush="#FFF520EC" BorderThickness="3" Margin="80,0,0,0">
+                <GroupBox x:Name="groupB" Header="Erreur Max:" BorderBrush="#FFF520EC" BorderThickness="3">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="P :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textprop" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="P :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textprop" Text="1000" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="I :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textinteg" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="I :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textinteg" Text="1000" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="D :" Height="25" Width="30" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="textderiv" Height="25" Width="50" BorderBrush="{x:Null}"/>
+                            <Label Content="D :" Width="30" BorderBrush="{x:Null}"/>
+                            <TextBox x:Name="textderiv" Text="1000" Width="50" BorderBrush="{x:Null}" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
-            <GroupBox Background="#FFF9F9F0"  BorderBrush="Black" BorderThickness="3"  Margin="40,0,0,0">
+            <GroupBox Grid.Column="1" Background="#FFF9F9F0"  BorderBrush="Black" BorderThickness="3"  HorizontalAlignment="Stretch">
                 <AsservDisplay:AsservissementRobot2RouesDisplayControl x:Name="asservSpeedDisplay"/>
             </GroupBox>
-        </StackPanel>
-        
+        </Grid>
     </Grid>
 </Window>
